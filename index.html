@@ -3,313 +3,905 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>esinecan.com - Under Construction</title>
+    <title>Eren Can Sinecan</title>
+    <meta name="description" content="Most problems are devex problems. The developer isn't always human. Agent harnesses, knowledge graphs, MCP servers.">
+    <meta property="og:title" content="Eren Can Sinecan">
+    <meta property="og:description" content="Most problems are devex problems. The developer isn't always human.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://esinecan.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        body {
-            background-color: #000080;
-            color: #00FF00;
-            font-family: 'Comic Sans MS', 'Courier New', monospace;
-            text-align: center;
-            margin: 0;
-            padding: 20px;
-            cursor: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"><text y="28" font-size="28">+</text></svg>'), crosshair;
+        :root {
+            --bg: #0a0a0f;
+            --bg-sidebar: #0d0d14;
+            --surface: #12121a;
+            --surface-hover: #181822;
+            --border: #1e1e2a;
+            --border-hover: #2a2a3a;
+            --text: #a8a8b8;
+            --text-secondary: #5a5a6e;
+            --heading: #e8e8f0;
+            --accent: #c9a04a;
+            --accent-dim: rgba(201, 160, 74, 0.10);
+            --accent-glow: rgba(201, 160, 74, 0.06);
+            --code-bg: #0e0e16;
+            --sidebar-width: 420px;
         }
 
-        .stars {
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 15px;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        ::selection {
+            background: var(--accent-dim);
+            color: var(--heading);
+        }
+
+        a { color: var(--accent); text-decoration: none; transition: color 0.15s; }
+        a:hover { color: var(--heading); }
+
+        /* ---- LAYOUT: Sidebar + Main ---- */
+        .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
+            width: var(--sidebar-width);
+            height: 100vh;
+            background: var(--bg-sidebar);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 72px 48px 40px;
+            z-index: 10;
         }
 
-        .star {
-            position: absolute;
-            color: #FFFF00;
-            animation: twinkle 1s infinite alternate;
+        .sidebar-top {}
+
+        .sidebar h1 {
+            color: var(--heading);
+            font-size: 1.8em;
+            font-weight: 600;
+            letter-spacing: -0.03em;
+            line-height: 1.2;
+            margin-bottom: 8px;
         }
 
-        @keyframes twinkle {
-            0% { opacity: 0.3; }
-            100% { opacity: 1; }
+        .sidebar .role {
+            color: var(--text-secondary);
+            font-size: 0.88em;
+            font-weight: 400;
+            margin-bottom: 24px;
+        }
+
+        .tagline {
+            color: var(--accent);
+            font-size: 0.92em;
+            font-weight: 400;
+            line-height: 1.65;
+            margin-bottom: 40px;
+        }
+
+        /* Nav */
+        .sidebar nav {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .sidebar nav a {
+            color: var(--text-secondary);
+            font-size: 0.78em;
+            font-weight: 500;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            padding: 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: color 0.2s;
+        }
+
+        .sidebar nav a::before {
+            content: '';
+            display: block;
+            width: 28px;
+            height: 1px;
+            background: var(--text-secondary);
+            transition: width 0.25s, background 0.25s;
+        }
+
+        .sidebar nav a:hover,
+        .sidebar nav a.active {
+            color: var(--heading);
+        }
+
+        .sidebar nav a:hover::before,
+        .sidebar nav a.active::before {
+            width: 56px;
+            background: var(--accent);
+        }
+
+        /* Socials */
+        .sidebar-bottom {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .sidebar-bottom a {
+            color: var(--text-secondary);
+            transition: color 0.2s;
+        }
+
+        .sidebar-bottom a:hover {
+            color: var(--accent);
+        }
+
+        .sidebar-bottom svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        /* ---- MAIN CONTENT ---- */
+        .main {
+            margin-left: var(--sidebar-width);
+            flex: 1;
+            padding: 72px 80px 120px;
+            max-width: calc(100% - var(--sidebar-width));
         }
 
         .content {
-            position: relative;
-            z-index: 1;
+            max-width: 720px;
         }
 
-        h1 {
-            font-size: 3em;
-            color: #FF00FF;
-            text-shadow: 3px 3px #FF0000, -1px -1px #00FFFF;
-            animation: rainbow 3s infinite;
-            margin-bottom: 0;
+        /* Section */
+        .section {
+            margin-bottom: 96px;
         }
 
-        @keyframes rainbow {
-            0% { color: #FF00FF; }
-            25% { color: #FFFF00; }
-            50% { color: #00FFFF; }
-            75% { color: #FF6600; }
-            100% { color: #FF00FF; }
+        .section-label {
+            color: var(--text-secondary);
+            font-size: 0.72em;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
         }
 
-        .marquee-container {
-            background: #800000;
-            border: 3px ridge #C0C0C0;
-            padding: 8px;
-            margin: 20px auto;
-            max-width: 600px;
+        .section-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
         }
 
-        .marquee-text {
-            color: #FFFF00;
+        /* ---- BLOG / ARTICLES ---- */
+        .article-card {
+            padding: 32px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            margin-bottom: 20px;
+            transition: border-color 0.25s, box-shadow 0.25s;
+        }
+
+        .article-card:hover {
+            border-color: var(--border-hover);
+            box-shadow: 0 4px 24px var(--accent-glow);
+        }
+
+        .article-date {
+            color: var(--text-secondary);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75em;
+            margin-bottom: 10px;
+        }
+
+        .article-card h3 {
+            color: var(--heading);
             font-size: 1.2em;
-            font-weight: bold;
+            font-weight: 600;
+            line-height: 1.35;
+            margin-bottom: 12px;
+        }
+
+        .article-card h3 a {
+            color: var(--heading);
+        }
+
+        .article-card h3 a:hover {
+            color: var(--accent);
+        }
+
+        .article-excerpt {
+            color: var(--text);
+            font-size: 0.9em;
+            line-height: 1.7;
+        }
+
+        .article-tags {
+            margin-top: 16px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7em;
+            color: var(--accent);
+            background: var(--accent-dim);
+            padding: 3px 10px;
+            border-radius: 4px;
+        }
+
+        /* ---- PROJECTS ---- */
+        .project {
+            padding: 24px 28px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            margin-bottom: 14px;
+            transition: border-color 0.25s, box-shadow 0.25s;
+        }
+
+        .project:hover {
+            border-color: var(--border-hover);
+            box-shadow: 0 4px 24px var(--accent-glow);
+        }
+
+        .project-header {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+
+        .project-name {
+            color: var(--heading);
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 500;
+            font-size: 0.92em;
+        }
+
+        .project-sub {
+            color: var(--text-secondary);
+            font-size: 0.82em;
+        }
+
+        .project p {
+            font-size: 0.88em;
+            line-height: 1.7;
+            color: var(--text);
+        }
+
+        .project-links {
+            margin-top: 12px;
+        }
+
+        .project-links a {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.78em;
+            margin-right: 16px;
+        }
+
+        .secondary-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-top: 14px;
+        }
+
+        .secondary-card {
+            padding: 20px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            transition: border-color 0.25s;
+        }
+
+        .secondary-card:hover { border-color: var(--border-hover); }
+
+        .secondary-card .project-name { font-size: 0.85em; margin-bottom: 6px; }
+        .secondary-card p { font-size: 0.82em; color: var(--text-secondary); line-height: 1.6; }
+
+        /* ---- RESUME ---- */
+        .resume-entry {
+            display: grid;
+            grid-template-columns: 140px 1fr;
+            gap: 24px;
+            padding: 24px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .resume-entry:last-child { border-bottom: none; }
+
+        .resume-date {
+            color: var(--text-secondary);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75em;
+            padding-top: 4px;
             white-space: nowrap;
-            animation: scroll-left 10s linear infinite;
         }
 
-        @keyframes scroll-left {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
+        .resume-body h3 {
+            color: var(--heading);
+            font-size: 0.95em;
+            font-weight: 500;
+            margin-bottom: 2px;
         }
 
-        .construction-gif {
-            font-size: 3em;
-            margin: 10px;
+        .resume-company {
+            color: var(--accent);
+            font-size: 0.88em;
+            font-weight: 400;
+            margin-bottom: 8px;
         }
 
-        .blink {
-            animation: blink-text 0.8s step-end infinite;
+        .resume-body p {
+            font-size: 0.85em;
+            line-height: 1.7;
+            color: var(--text);
         }
 
-        @keyframes blink-text {
-            0%, 100% { visibility: visible; }
-            50% { visibility: hidden; }
+        .resume-skills {
+            margin-top: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
         }
 
-        hr {
-            border: none;
-            height: 4px;
-            background: linear-gradient(to right, #FF0000, #FFFF00, #00FF00, #00FFFF, #0000FF, #FF00FF);
-            margin: 20px 0;
+        .resume-skills .tag {
+            font-size: 0.65em;
+            color: var(--text-secondary);
+            background: transparent;
+            border: 1px solid var(--border);
         }
 
-        .counter-box {
-            background: #000000;
-            border: 3px inset #808080;
-            display: inline-block;
-            padding: 10px 20px;
-            margin: 15px;
+        /* Education */
+        .edu-entry {
+            padding: 16px 0;
+            border-bottom: 1px solid var(--border);
         }
 
-        .counter-box img {
-            height: 20px;
-            vertical-align: middle;
+        .edu-entry:last-child { border-bottom: none; }
+
+        .edu-entry h3 {
+            color: var(--heading);
+            font-size: 0.92em;
+            font-weight: 500;
         }
 
-        .guestbook-btn {
-            background: #C0C0C0;
-            border: 3px outset #FFFFFF;
-            color: #000080;
-            font-family: 'Comic Sans MS', cursive;
-            font-size: 1.1em;
-            padding: 8px 20px;
-            cursor: pointer;
-            font-weight: bold;
-            text-decoration: none;
-            display: inline-block;
-            margin: 10px;
+        .edu-entry p {
+            color: var(--text-secondary);
+            font-size: 0.85em;
         }
 
-        .guestbook-btn:active {
-            border-style: inset;
+        /* Award */
+        .award {
+            padding: 20px 24px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--accent);
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 16px;
         }
 
-        .webring {
-            border: 2px dashed #00FF00;
-            padding: 10px;
-            margin: 20px auto;
-            max-width: 400px;
+        .award h3 {
+            color: var(--heading);
+            font-size: 0.92em;
+            font-weight: 500;
+            margin-bottom: 4px;
         }
 
-        .email-link {
-            color: #00FFFF;
-            font-size: 1.1em;
+        .award p {
+            color: var(--text);
+            font-size: 0.85em;
+            line-height: 1.65;
         }
 
-        table.info {
-            margin: 20px auto;
-            border: 2px solid #00FF00;
-            border-collapse: collapse;
-        }
-
-        table.info td {
-            border: 1px solid #00FF00;
-            padding: 8px 15px;
-            text-align: left;
-        }
-
-        table.info td:first-child {
-            color: #FFFF00;
-            font-weight: bold;
-        }
-
-        .badge-row {
-            margin: 20px 0;
-        }
-
-        .badge {
-            display: inline-block;
-            border: 2px outset #C0C0C0;
-            padding: 4px 12px;
-            margin: 4px;
+        .award .award-issuer {
+            color: var(--text-secondary);
             font-size: 0.8em;
-            font-weight: bold;
         }
 
-        .fire {
-            display: inline-block;
-            animation: fire-dance 0.3s infinite alternate;
+        /* ---- FULL ARTICLE ---- */
+        .article-full h2 {
+            color: var(--heading);
+            font-size: 1.15em;
+            font-weight: 600;
+            margin: 40px 0 16px;
+            letter-spacing: normal;
+            text-transform: none;
         }
 
-        @keyframes fire-dance {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-3px); }
+        .article-full p {
+            margin-bottom: 16px;
+            font-size: 0.92em;
+            line-height: 1.8;
+        }
+
+        .article-full code {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85em;
+            background: var(--code-bg);
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: var(--accent);
+        }
+
+        .article-full pre {
+            background: var(--code-bg);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 20px 24px;
+            margin: 20px 0;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.82em;
+            line-height: 1.65;
+            color: var(--text);
+        }
+
+        .article-full pre code {
+            background: none;
+            padding: 0;
+            color: inherit;
+        }
+
+        .article-full strong {
+            color: var(--heading);
+            font-weight: 500;
+        }
+
+        .article-full .article-footer {
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+            font-size: 0.85em;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        /* ---- RESPONSIVE ---- */
+        @media (max-width: 1024px) {
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+                border-right: none;
+                border-bottom: 1px solid var(--border);
+                padding: 48px 32px 32px;
+            }
+            .main {
+                margin-left: 0;
+                max-width: 100%;
+                padding: 48px 32px 80px;
+            }
+            .layout { flex-direction: column; }
+            .resume-entry {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+        }
+
+        @media (max-width: 540px) {
+            .sidebar { padding: 32px 20px 24px; }
+            .main { padding: 32px 20px 60px; }
+            .secondary-grid { grid-template-columns: 1fr; }
+            .article-card { padding: 24px 20px; }
         }
     </style>
 </head>
 <body>
-    <div class="stars" id="stars"></div>
+    <div class="layout">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-top">
+                <h1>Eren Can Sinecan</h1>
+                <div class="role">Backend, DevOps, AI Agent Infrastructure Engineer</div>
+                <div class="tagline">Most problems are devex problems.<br>The developer isn't always human.</div>
 
-    <div class="content">
-        <div class="construction-gif">
-            <span class="fire">&#128293;</span>
-            &#128679; &#128679; &#128679;
-            <span class="fire">&#128293;</span>
-        </div>
-
-        <h1>ESINECAN.COM</h1>
-
-        <p style="font-size: 1.4em; color: #FFFFFF;">
-            <span class="blink">*** UNDER CONSTRUCTION ***</span>
-        </p>
-
-        <div class="construction-gif">
-            &#128119;&#8205;&#9794;&#65039; &#128296; &#128736;&#65039; &#9889;
-        </div>
-
-        <hr>
-
-        <div class="marquee-container">
-            <div class="marquee-text">
-                Welcome to my homepage! This site is currently being built. Please come back soon! -- Best viewed in Netscape Navigator 4.0 at 800x600 --
+                <nav>
+                    <a href="#blog" class="active">Blog</a>
+                    <a href="#projects">Projects</a>
+                    <a href="#resume">Resume</a>
+                </nav>
             </div>
-        </div>
 
-        <hr>
+            <div class="sidebar-bottom">
+                <a href="https://github.com/esinecan" aria-label="GitHub">
+                    <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                </a>
+                <a href="https://www.linkedin.com/in/esinecan" aria-label="LinkedIn">
+                    <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                </a>
+            </div>
+        </aside>
 
-        <table class="info">
-            <tr>
-                <td>Webmaster</td>
-                <td>Eren Can Sinecan</td>
-            </tr>
-            <tr>
-                <td>Status</td>
-                <td><span class="blink" style="color: #FF0000;">UNDER HEAVY CONSTRUCTION</span></td>
-            </tr>
-            <tr>
-                <td>Last Updated</td>
-                <td>April 12, 2026</td>
-            </tr>
-            <tr>
-                <td>Resolution</td>
-                <td>Best at 800x600</td>
-            </tr>
-        </table>
+        <!-- MAIN CONTENT -->
+        <main class="main">
+            <div class="content">
 
-        <hr>
+                <!-- BLOG -->
+                <section id="blog" class="section">
+                    <div class="section-label">Blog</div>
 
-        <p style="color: #FFFFFF; font-size: 1.2em;">
-            &#127760; This page has been visited by
-        </p>
-        <div class="counter-box">
-            <span style="color: #00FF00; font-family: 'Courier New', monospace; font-size: 1.5em; letter-spacing: 4px;">000042</span>
-        </div>
-        <p style="color: #FFFFFF;">surfers since April 2026!</p>
+                    <!-- FEATURED ARTICLE: MCP Inspector -->
+                    <article class="article-full">
+                        <div class="article-date">April 2026</div>
+                        <h3 style="color: var(--heading); font-size: 1.4em; font-weight: 600; margin-bottom: 8px; line-height: 1.3;">An MCP tool to let AI debug any MCP server on the fly</h3>
+                        <div class="article-tags" style="margin-bottom: 32px;">
+                            <span class="tag">MCP</span>
+                            <span class="tag">TypeScript</span>
+                            <span class="tag">Meta-Tooling</span>
+                            <span class="tag">DevEx</span>
+                        </div>
 
-        <hr>
+                        <p>Here is a non-exhaustive list of things that are now MCP tools in my daily workflow: NotebookLM notebooks. Google Sheets. A Playwright browser. Datadog dashboards. MongoDB queries. Jira and Confluence. kubectl. Who needs a babysitter, when I can connect my tamagotchi to an LLM over USB-C.</p>
 
-        <div class="badge-row">
-            <span class="badge" style="background: #000080; color: #FFFFFF;">HTML</span>
-            <span class="badge" style="background: #800080; color: #FFFFFF;">CSS</span>
-            <span class="badge" style="background: #008000; color: #FFFFFF;">JavaScript</span>
-            <span class="badge" style="background: #800000; color: #FFFF00;">NO FLASH</span>
-            <span class="badge" style="background: #000000; color: #00FF00;">HACKER SAFE</span>
-        </div>
+                        <p>Every one of these integrations was built iteratively, tested live, and debugged from inside the same AI conversation that uses them. I liked the idea of exposing things as tools to AI the moment I heard it. Then you can abstract away a lot of the predictable and complex parts like injecting a cluster name into a kubectl command. But the problem is, it is pretty tricky to build that many tools each with their own individual needs.</p>
 
-        <div class="webring">
-            <p style="color: #FFFF00; margin: 5px;">&#127760; CoolSites WebRing &#127760;</p>
-            <a class="guestbook-btn" href="#">&lt;&lt; Prev</a>
-            <a class="guestbook-btn" href="#">Random</a>
-            <a class="guestbook-btn" href="#">Next &gt;&gt;</a>
-        </div>
+                        <p>That is why I have constructed a mcp server that can be used to connect to any mcp server. It was inspired by mcp-inspector initially, so I named it <a href="https://github.com/esinecan/mcp-inspector-as-mcp-server">mcp-inspector-as-mcp-server</a>. It's 400 lines of TypeScript and the MCP SDK is its only dependency. It is a simple tool but it really changed my mental model of tool building.</p>
 
-        <hr>
+                        <h2>"One tool to test them all"</h2>
 
-        <a class="guestbook-btn" href="#">&#128221; Sign My Guestbook!</a>
+                        <p>MCP is a good protocol with a terrible development experience.</p>
 
-        <hr>
+                        <p>Because MCP is a relatively new protocol with multiple transports, and JSON-RPC among them is a particularly problematic one to debug, it can be quite frustrating to develop an mcp server over the regular mcp-inspector through trial and error. In the age of AI, I want to be able to let my AI assistant loose on the broken draft, give it the response body I am going for, and have it iterate over the code until the nuts and bolts are set up correctly for it to run.</p>
 
-        <p class="email-link">
-            &#9993; Drop me a line: <a href="mailto:eren@esinecan.com" style="color: #FF00FF;">eren@esinecan.com</a>
-        </p>
+                        <p>The idea is simple enough to fit in a sentence: make the MCP Inspector itself an MCP server, so your AI assistant can inspect and test other MCP servers from inside the conversation where it's going to use them.</p>
 
-        <p style="color: #808080; font-size: 0.8em; margin-top: 40px;">
-            &copy; 2026 esinecan.com | Made with &#10084;&#65039; and a 56k modem<br>
-            This site is Y2K compliant!<br>
-            Netscape Now! | Internet Explorer? No thanks!
-        </p>
+                        <p>Connect to a target server. List its tools. Call them. Read the traffic. See errors. All without leaving the chat.</p>
 
-        <div class="construction-gif">
-            &#128679; &#128679; &#128679;
-        </div>
+<pre><code>You:     "Connect to the new pricing MCP server and test the rate lookup tool"
+Claude:  [calls insp_connect] -> session established
+         [calls insp_tools_list] -> 14 tools found
+         [calls insp_tools_call: get_rate] -> works, returns rate object
+         [calls insp_tools_call: get_rate with bad input] -> 500, missing field validation
+         "Rate lookup works but crashes on missing fields. Want me to fix the server?"</code></pre>
+
+                        <p>That's the entire development loop. No context switch. No separate terminal. No "let me check the web inspector and get back to you."</p>
+
+                        <h2>Sessions that survive</h2>
+
+                        <p>The interesting technical problem is state. MCP tool calls are stateless by default. You call a tool, you get a response, you move on. But testing a server is inherently stateful: you connect, you poke around, you want the connection to stay alive.</p>
+
+                        <p>So the inspector manages persistent sessions. <code>insp_connect</code> returns a <code>session_id</code>. Every subsequent call passes that ID and reuses the same connection. Sessions have a 30-minute idle TTL with automatic garbage collection. Simple lifecycle, no configuration.</p>
+
+                        <p>The same tools also work without a session ID. Ephemeral mode, connect-call-disconnect. So you get both: quick one-off inspections and long-lived debugging sessions through the same interface.</p>
+
+                        <h2>The event buffer</h2>
+
+                        <p>Every session wraps its transport in a tracing layer that captures all traffic into a ring buffer. 1000 events, FIFO. Every JSON-RPC message in, every message out, every notification, every error.</p>
+
+<pre><code>[calls insp_read_events with session_id, types: ["error"]]
+-> 3 errors in last 5 minutes:
+   1. "Invalid params: expected string for 'shipmentId', got number"
+   2. "Timeout after 30s on get_shipment_360"
+   3. "Connection reset during batch operation"</code></pre>
+
+                        <p>This turns "it doesn't work" into "here's exactly what went wrong, in order, with timestamps." The ring buffer means memory stays bounded even in long sessions. When the buffer fills, oldest events drop. You lose ancient history but never run out of memory.</p>
+
+                        <p>The implementation required solving a timing bug in the MCP SDK: the Protocol class sets handler callbacks after calling <code>transport.start()</code>, which means any wrappers you set in <code>start()</code> get overwritten. The fix was using JavaScript getters and setters to intercept handler assignment dynamically. The SDK sets the handler, our setter wraps it with tracing, and forwards the wrapped version. Clean, no SDK patches required.</p>
+
+                        <h2>Steering from the outside</h2>
+
+                        <p>This bit is low key pretty chill:</p>
+
+                        <p>When an AI assistant is testing an MCP server, sometimes you want to nudge it. "Try the error path." "Focus on that timeout." "Skip auth, I'll fix it later." But you don't want to interrupt the conversation flow.</p>
+
+                        <p>The inspector has a steering mechanism. A simple FIFO queue per session. You inject a message, either through the <code>insp_inject_steering</code> tool or via a tiny HTTP API on port 9847. It gets delivered on the next tool response as a second content block.</p>
+
+<pre><code># From your terminal, while the AI is working:
+./mcp-steer "skip the auth tests, focus on rate compilation"</code></pre>
+
+                        <p>The AI's next tool call comes back with two blocks: the actual result, and your steering message prefixed with a lightning bolt. If you remembered that "oh you need to call the rate update before you reprice the line items," you do not need to interrupt the agent and type this. You can simply inject the steering message.</p>
+
+                        <p>Although my initial instinct was to overdesign with websockets and streaming, I ended up going simple when it comes to steering. Queue up, drain on next call. The simplicity is the point. Steering doesn't need to be real-time. It needs to be reliable and not add complexity to the MCP protocol itself.</p>
+
+                        <h2>Why this matters beyond debugging</h2>
+
+                        <p>Once you have a tool that can connect to any MCP server, list its capabilities, and call its tools with full observability, a second thing becomes possible: iterative integration.</p>
+
+                        <p>You get the rough draft together, tell the AI "a success response should look like this," and let it loop. Test, find the bug, fix, restart, repeat.</p>
+
+                        <p>And because the inspector handles all three MCP transports (stdio for local processes, SSE for remote servers, streamable HTTP), it actually covers majority of the possible use cases in its niche. Local dev server, remote environment behind an API, or if you're into suffering, even SSE.</p>
+
+                        <p>This is what made the absurd integration list at the top of this article possible. Each of those wasn't a big project. Each was an afternoon of iterative development with the inspector keeping the feedback loop tight. Connect to the new server, test its tools, see what breaks, fix it, test again. The inspector removes the overhead that makes "just slap an MCP layer on it" feel daunting.</p>
+
+                        <h2>The meta-tooling thesis</h2>
+
+                        <p>There's a broader point here that goes beyond this one project.</p>
+
+                        <p>As tool ecosystems grow you need tools about tools. MCP, though flawed, seems to have become the norm as it was intended to be from the beginning. Thus, in the same way you need a debugger for your code and an inspector for your network requests, you need an inspector for your tool layer.</p>
+
+                        <p>If you're building MCP servers, this is something I'd absolutely recommend. While far from being a silver bullet, it very reliably solves one specific and very common problem.</p>
+
+                        <p>400 lines. One dependency. Give it a go. E-mail me if you like it. I will definitely get back 60% of the time.</p>
+
+                        <div class="article-footer">
+                            The code is at <a href="https://github.com/esinecan/mcp-inspector-as-mcp-server">github.com/esinecan/mcp-inspector-as-mcp-server</a>. Single npm dependency. MIT licensed.
+                        </div>
+                    </article>
+
+                    <!-- Previous article card -->
+                    <div class="article-card">
+                        <div class="article-date">Jul 2025</div>
+                        <h3><a href="https://www.linkedin.com/pulse/llm-intern-fallacy-eren-can-sinecan-5gh5e/">The LLM as Intern Fallacy</a></h3>
+                        <p class="article-excerpt">Why treating LLMs as junior developers who need supervision misses the architectural point entirely. They're not interns. They're power tools that need jigs.</p>
+                        <div class="article-tags">
+                            <span class="tag">AI</span>
+                            <span class="tag">Architecture</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- PROJECTS -->
+                <section id="projects" class="section">
+                    <div class="section-label">Projects</div>
+
+                    <div class="project">
+                        <div class="project-header">
+                            <span class="project-name">Cortex</span>
+                            <span class="project-sub">Executive function for AI agents</span>
+                        </div>
+                        <p>A 9-state workflow harness with tool visibility gating. The model only sees what's relevant to the current task. Persistent cross-session tasks, 7 guided pathways, reviewer simulation trained on 627 PR review comments. Proxies 9 MCP servers.</p>
+                        <div class="project-links">
+                            <a href="https://github.com/esinecan/cortex">GitHub</a>
+                        </div>
+                    </div>
+
+                    <div class="project">
+                        <div class="project-header">
+                            <span class="project-name">Crucible</span>
+                            <span class="project-sub">Knowledge graph reasoning engine</span>
+                        </div>
+                        <p>Thompson Sampling bandit over 6 insight strategies. MCTS tree search for answer reasoning. Answer quality feeds back as rewards to the insight bandit posteriors. Proven across freight logistics, German federal law, and political analysis.</p>
+                        <div class="project-links">
+                            <a href="https://github.com/esinecan/crucible">GitHub</a>
+                        </div>
+                    </div>
+
+                    <div class="project">
+                        <div class="project-header">
+                            <span class="project-name">Burokrat</span>
+                            <span class="project-sub">German federal law as queryable infrastructure</span>
+                        </div>
+                        <p>6,862 laws, 89,121 sections, 251,000 court decisions, 560,000+ citation edges in Neo4j. Adversarial debate engine: defense vs. prosecution agents with a symbolic evaluator as referee.</p>
+                        <div class="project-links">
+                            <a href="https://github.com/esinecan/burokrat">GitHub</a>
+                        </div>
+                    </div>
+
+                    <div class="secondary-grid">
+                        <div class="secondary-card">
+                            <div class="project-name">Faro MCP</div>
+                            <p>Dynamic API-to-tool bridge. Generates 312 tools from 16 service OpenAPI specs at startup.</p>
+                        </div>
+                        <div class="secondary-card">
+                            <div class="project-name"><a href="https://github.com/esinecan/agentic-ai-browser">agentic-ai-browser</a></div>
+                            <p>Autonomous browser agent. DOM pruning for context management. 162 stars.</p>
+                        </div>
+                        <div class="secondary-card">
+                            <div class="project-name"><a href="https://github.com/esinecan/skynet-agent">skynet-agent</a></div>
+                            <p>Digital proto-individual with dual-layer memory and Neo4j knowledge graph. 128 stars.</p>
+                        </div>
+                        <div class="secondary-card">
+                            <div class="project-name">Deepthink</div>
+                            <p>Branching thought tree MCP server for structured reasoning across sessions.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- RESUME -->
+                <section id="resume" class="section">
+                    <div class="section-label">Resume</div>
+
+                    <!-- Award -->
+                    <div class="award">
+                        <h3>Most Innovative AI Project</h3>
+                        <p class="award-issuer">Ready Tensor, Agentic AI Innovation Challenge -- April 2025</p>
+                        <p>Adaptive Autonomous AI Co-Browser. Recognized for innovation in autonomous web agents, local-first architecture, and human-in-the-loop agentic workflows. Selected among global submissions.</p>
+                    </div>
+
+                    <div style="margin-bottom: 48px;"></div>
+
+                    <!-- Experience -->
+                    <div class="section-label">Experience</div>
+
+                    <div class="resume-entry">
+                        <div class="resume-date">2025 -- Present</div>
+                        <div class="resume-body">
+                            <h3>Senior Engineer</h3>
+                            <div class="resume-company">Forto -- Berlin</div>
+                            <p>Pricing engine infrastructure for freight logistics. Weight bracket matching, partial quote integration, depot rate selection, local charges and customs. 80+ PRs across rates-management, pricing engine, and TMS. Created Faro MCP (312 tools from 16 service APIs) and Cortex-EM/PM for engineering workflow automation. 100+ code reviews.</p>
+                            <div class="resume-skills">
+                                <span class="tag">TypeScript</span>
+                                <span class="tag">NestJS</span>
+                                <span class="tag">MongoDB</span>
+                                <span class="tag">AWS</span>
+                                <span class="tag">Kubernetes</span>
+                                <span class="tag">MCP</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="resume-entry">
+                        <div class="resume-date">2025</div>
+                        <div class="resume-body">
+                            <h3>AI & Backend Engineer</h3>
+                            <div class="resume-company">Freelance -- Berlin</div>
+                            <p>Contract work bridging backend infrastructure and AI agent systems. Built agentic-ai-browser (162 stars, award-winning) and began skynet-agent. RAG pipelines, LangChain orchestration, AWS infrastructure.</p>
+                            <div class="resume-skills">
+                                <span class="tag">Java</span>
+                                <span class="tag">Spring Boot</span>
+                                <span class="tag">LangChain</span>
+                                <span class="tag">RAG</span>
+                                <span class="tag">AWS</span>
+                                <span class="tag">React</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="resume-entry">
+                        <div class="resume-date">2019 -- 2025</div>
+                        <div class="resume-body">
+                            <h3>Senior Backend Developer</h3>
+                            <div class="resume-company">CompuGroup Medical -- Berlin</div>
+                            <p>Led monolith-to-microservices decomposition across Spring Boot and Kafka. Migrated messaging from ActiveMQ to Kafka. Established CI/CD pipelines with Jenkins and Kubernetes, cutting deployment cycles by 40%. Built ELK dashboards for incident detection.</p>
+                            <div class="resume-skills">
+                                <span class="tag">Java</span>
+                                <span class="tag">Spring Boot</span>
+                                <span class="tag">Kafka</span>
+                                <span class="tag">Kubernetes</span>
+                                <span class="tag">AWS</span>
+                                <span class="tag">ELK</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="resume-entry">
+                        <div class="resume-date">2017 -- 2019</div>
+                        <div class="resume-body">
+                            <h3>Backend Developer</h3>
+                            <div class="resume-company">Giata GmbH -- Berlin</div>
+                            <p>Transformed PHP monolith into Node.js microservices, cutting page load times from 2s to under 1s. Automated AWS CloudFormation processes. RabbitMQ for service communication.</p>
+                            <div class="resume-skills">
+                                <span class="tag">Node.js</span>
+                                <span class="tag">TypeScript</span>
+                                <span class="tag">AWS</span>
+                                <span class="tag">RabbitMQ</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="resume-entry">
+                        <div class="resume-date">2016 -- 2017</div>
+                        <div class="resume-body">
+                            <h3>Java Microservices Engineer</h3>
+                            <div class="resume-company">AUTO1 Group -- Berlin</div>
+                            <p>Spring Cloud microservice architecture. Implemented ELK-based monitoring, reducing root-cause analysis time from days to hours.</p>
+                            <div class="resume-skills">
+                                <span class="tag">Java</span>
+                                <span class="tag">Spring Cloud</span>
+                                <span class="tag">ELK</span>
+                                <span class="tag">AWS</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="resume-entry">
+                        <div class="resume-date">2015 -- 2016</div>
+                        <div class="resume-body">
+                            <h3>Head of Engineering</h3>
+                            <div class="resume-company">Molto DS -- Istanbul</div>
+                            <p>Led engineering for first product using MEAN Stack, Docker, and Azure. Implemented testing frameworks with Jasmine and Karma.</p>
+                            <div class="resume-skills">
+                                <span class="tag">Node.js</span>
+                                <span class="tag">MongoDB</span>
+                                <span class="tag">Docker</span>
+                                <span class="tag">Azure</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="resume-entry">
+                        <div class="resume-date">2013 -- 2015</div>
+                        <div class="resume-body">
+                            <h3>Senior Software Engineer</h3>
+                            <div class="resume-company">Garanti Teknoloji -- Istanbul</div>
+                            <p>Web applications for pension customers and insurance sales using AngularJS and Spring MVC. Reporting systems. Internal knowledge sharing portal.</p>
+                            <div class="resume-skills">
+                                <span class="tag">Java</span>
+                                <span class="tag">Spring MVC</span>
+                                <span class="tag">AngularJS</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="resume-entry">
+                        <div class="resume-date">2011 -- 2013</div>
+                        <div class="resume-body">
+                            <h3>Software Development Specialist</h3>
+                            <div class="resume-company">Bilge Adam / Veripark -- Istanbul</div>
+                            <p>Enterprise portals for Borusan Automotive and Borusan Holding. Internet banking application with J2EE, JSF, and Oracle.</p>
+                            <div class="resume-skills">
+                                <span class="tag">Java</span>
+                                <span class="tag">J2EE</span>
+                                <span class="tag">Oracle</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 48px;"></div>
+
+                    <!-- Education -->
+                    <div class="section-label">Education</div>
+
+                    <div class="edu-entry">
+                        <h3>Koc University</h3>
+                        <p>BS Computer Engineering (Full Merit Scholarship) -- 2005-2011</p>
+                    </div>
+
+                    <div class="edu-entry">
+                        <h3>Izmir High School of Science</h3>
+                        <p>2002-2005</p>
+                    </div>
+
+                    <div style="margin-top: 48px;"></div>
+
+                    <!-- Languages -->
+                    <div class="section-label">Languages</div>
+                    <div style="display: flex; gap: 32px; font-size: 0.9em;">
+                        <div><strong style="color: var(--heading);">Turkish</strong> <span style="color: var(--text-secondary);">Native</span></div>
+                        <div><strong style="color: var(--heading);">English</strong> <span style="color: var(--text-secondary);">Full professional</span></div>
+                        <div><strong style="color: var(--heading);">German</strong> <span style="color: var(--text-secondary);">Conversational</span></div>
+                    </div>
+                </section>
+
+            </div>
+        </main>
     </div>
 
+    <!-- Scroll spy for nav highlight -->
     <script>
-        // Generate twinkling stars
-        const starsContainer = document.getElementById('stars');
-        for (let i = 0; i < 50; i++) {
-            const star = document.createElement('div');
-            star.className = 'star';
-            star.textContent = ['*', '+', '.', '*'][Math.floor(Math.random() * 4)];
-            star.style.left = Math.random() * 100 + '%';
-            star.style.top = Math.random() * 100 + '%';
-            star.style.animationDelay = Math.random() * 2 + 's';
-            star.style.fontSize = (Math.random() * 16 + 8) + 'px';
-            starsContainer.appendChild(star);
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.sidebar nav a');
+
+        function updateNav() {
+            const scrollY = window.scrollY + 120;
+            let current = '';
+            sections.forEach(s => {
+                if (s.offsetTop <= scrollY) current = s.id;
+            });
+            navLinks.forEach(link => {
+                link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+            });
         }
 
-        // Cursor trail effect
-        document.addEventListener('mousemove', function(e) {
-            const trail = document.createElement('div');
-            trail.style.position = 'fixed';
-            trail.style.left = e.clientX + 'px';
-            trail.style.top = e.clientY + 'px';
-            trail.style.color = '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0');
-            trail.style.pointerEvents = 'none';
-            trail.style.zIndex = '9999';
-            trail.style.fontSize = '12px';
-            trail.textContent = '*';
-            trail.style.transition = 'opacity 0.5s';
-            document.body.appendChild(trail);
-            setTimeout(() => { trail.style.opacity = '0'; }, 100);
-            setTimeout(() => { trail.remove(); }, 600);
-        });
+        window.addEventListener('scroll', updateNav, { passive: true });
+        updateNav();
     </script>
 </body>
 </html>
