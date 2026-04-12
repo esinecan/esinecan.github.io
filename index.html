@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>esinecan.com - Under Construction</title>
+    <style>
+        body {
+            background-color: #000080;
+            color: #00FF00;
+            font-family: 'Comic Sans MS', 'Courier New', monospace;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+            cursor: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"><text y="28" font-size="28">+</text></svg>'), crosshair;
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            color: #FFFF00;
+            animation: twinkle 1s infinite alternate;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: 3em;
+            color: #FF00FF;
+            text-shadow: 3px 3px #FF0000, -1px -1px #00FFFF;
+            animation: rainbow 3s infinite;
+            margin-bottom: 0;
+        }
+
+        @keyframes rainbow {
+            0% { color: #FF00FF; }
+            25% { color: #FFFF00; }
+            50% { color: #00FFFF; }
+            75% { color: #FF6600; }
+            100% { color: #FF00FF; }
+        }
+
+        .marquee-container {
+            background: #800000;
+            border: 3px ridge #C0C0C0;
+            padding: 8px;
+            margin: 20px auto;
+            max-width: 600px;
+        }
+
+        .marquee-text {
+            color: #FFFF00;
+            font-size: 1.2em;
+            font-weight: bold;
+            white-space: nowrap;
+            animation: scroll-left 10s linear infinite;
+        }
+
+        @keyframes scroll-left {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        .construction-gif {
+            font-size: 3em;
+            margin: 10px;
+        }
+
+        .blink {
+            animation: blink-text 0.8s step-end infinite;
+        }
+
+        @keyframes blink-text {
+            0%, 100% { visibility: visible; }
+            50% { visibility: hidden; }
+        }
+
+        hr {
+            border: none;
+            height: 4px;
+            background: linear-gradient(to right, #FF0000, #FFFF00, #00FF00, #00FFFF, #0000FF, #FF00FF);
+            margin: 20px 0;
+        }
+
+        .counter-box {
+            background: #000000;
+            border: 3px inset #808080;
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 15px;
+        }
+
+        .counter-box img {
+            height: 20px;
+            vertical-align: middle;
+        }
+
+        .guestbook-btn {
+            background: #C0C0C0;
+            border: 3px outset #FFFFFF;
+            color: #000080;
+            font-family: 'Comic Sans MS', cursive;
+            font-size: 1.1em;
+            padding: 8px 20px;
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px;
+        }
+
+        .guestbook-btn:active {
+            border-style: inset;
+        }
+
+        .webring {
+            border: 2px dashed #00FF00;
+            padding: 10px;
+            margin: 20px auto;
+            max-width: 400px;
+        }
+
+        .email-link {
+            color: #00FFFF;
+            font-size: 1.1em;
+        }
+
+        table.info {
+            margin: 20px auto;
+            border: 2px solid #00FF00;
+            border-collapse: collapse;
+        }
+
+        table.info td {
+            border: 1px solid #00FF00;
+            padding: 8px 15px;
+            text-align: left;
+        }
+
+        table.info td:first-child {
+            color: #FFFF00;
+            font-weight: bold;
+        }
+
+        .badge-row {
+            margin: 20px 0;
+        }
+
+        .badge {
+            display: inline-block;
+            border: 2px outset #C0C0C0;
+            padding: 4px 12px;
+            margin: 4px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+
+        .fire {
+            display: inline-block;
+            animation: fire-dance 0.3s infinite alternate;
+        }
+
+        @keyframes fire-dance {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-3px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+
+    <div class="content">
+        <div class="construction-gif">
+            <span class="fire">&#128293;</span>
+            &#128679; &#128679; &#128679;
+            <span class="fire">&#128293;</span>
+        </div>
+
+        <h1>ESINECAN.COM</h1>
+
+        <p style="font-size: 1.4em; color: #FFFFFF;">
+            <span class="blink">*** UNDER CONSTRUCTION ***</span>
+        </p>
+
+        <div class="construction-gif">
+            &#128119;&#8205;&#9794;&#65039; &#128296; &#128736;&#65039; &#9889;
+        </div>
+
+        <hr>
+
+        <div class="marquee-container">
+            <div class="marquee-text">
+                Welcome to my homepage! This site is currently being built. Please come back soon! -- Best viewed in Netscape Navigator 4.0 at 800x600 --
+            </div>
+        </div>
+
+        <hr>
+
+        <table class="info">
+            <tr>
+                <td>Webmaster</td>
+                <td>Eren Can Sinecan</td>
+            </tr>
+            <tr>
+                <td>Status</td>
+                <td><span class="blink" style="color: #FF0000;">UNDER HEAVY CONSTRUCTION</span></td>
+            </tr>
+            <tr>
+                <td>Last Updated</td>
+                <td>April 12, 2026</td>
+            </tr>
+            <tr>
+                <td>Resolution</td>
+                <td>Best at 800x600</td>
+            </tr>
+        </table>
+
+        <hr>
+
+        <p style="color: #FFFFFF; font-size: 1.2em;">
+            &#127760; This page has been visited by
+        </p>
+        <div class="counter-box">
+            <span style="color: #00FF00; font-family: 'Courier New', monospace; font-size: 1.5em; letter-spacing: 4px;">000042</span>
+        </div>
+        <p style="color: #FFFFFF;">surfers since April 2026!</p>
+
+        <hr>
+
+        <div class="badge-row">
+            <span class="badge" style="background: #000080; color: #FFFFFF;">HTML</span>
+            <span class="badge" style="background: #800080; color: #FFFFFF;">CSS</span>
+            <span class="badge" style="background: #008000; color: #FFFFFF;">JavaScript</span>
+            <span class="badge" style="background: #800000; color: #FFFF00;">NO FLASH</span>
+            <span class="badge" style="background: #000000; color: #00FF00;">HACKER SAFE</span>
+        </div>
+
+        <div class="webring">
+            <p style="color: #FFFF00; margin: 5px;">&#127760; CoolSites WebRing &#127760;</p>
+            <a class="guestbook-btn" href="#">&lt;&lt; Prev</a>
+            <a class="guestbook-btn" href="#">Random</a>
+            <a class="guestbook-btn" href="#">Next &gt;&gt;</a>
+        </div>
+
+        <hr>
+
+        <a class="guestbook-btn" href="#">&#128221; Sign My Guestbook!</a>
+
+        <hr>
+
+        <p class="email-link">
+            &#9993; Drop me a line: <a href="mailto:eren@esinecan.com" style="color: #FF00FF;">eren@esinecan.com</a>
+        </p>
+
+        <p style="color: #808080; font-size: 0.8em; margin-top: 40px;">
+            &copy; 2026 esinecan.com | Made with &#10084;&#65039; and a 56k modem<br>
+            This site is Y2K compliant!<br>
+            Netscape Now! | Internet Explorer? No thanks!
+        </p>
+
+        <div class="construction-gif">
+            &#128679; &#128679; &#128679;
+        </div>
+    </div>
+
+    <script>
+        // Generate twinkling stars
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 50; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.textContent = ['*', '+', '.', '*'][Math.floor(Math.random() * 4)];
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 2 + 's';
+            star.style.fontSize = (Math.random() * 16 + 8) + 'px';
+            starsContainer.appendChild(star);
+        }
+
+        // Cursor trail effect
+        document.addEventListener('mousemove', function(e) {
+            const trail = document.createElement('div');
+            trail.style.position = 'fixed';
+            trail.style.left = e.clientX + 'px';
+            trail.style.top = e.clientY + 'px';
+            trail.style.color = '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0');
+            trail.style.pointerEvents = 'none';
+            trail.style.zIndex = '9999';
+            trail.style.fontSize = '12px';
+            trail.textContent = '*';
+            trail.style.transition = 'opacity 0.5s';
+            document.body.appendChild(trail);
+            setTimeout(() => { trail.style.opacity = '0'; }, 100);
+            setTimeout(() => { trail.remove(); }, 600);
+        });
+    </script>
+</body>
+</html>
