@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eren Can Sinecan</title>
+    <meta name="description" content="Most problems are devex problems. The developer isn't always human. Agent harnesses, knowledge graphs, MCP servers.">
+    <meta property="og:title" content="Eren Can Sinecan">
+    <meta property="og:description" content="Most problems are devex problems. The developer isn't always human.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://esinecan.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..500&family=Spectral:ital,wght@0,300;0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #09090d;
+            --bg-sidebar: #0b0b11;
+            --surface: #131019;
+            --surface-hover: #181420;
+            --border: #221e2c;
+            --border-hover: #342e42;
+            --text: #b6b3c2;
+            --text-secondary: #6b6678;
+            --heading: #ece9f3;
+            --accent: #c9a04a;
+            --accent-bright: #e3c074;
+            --accent-dim: rgba(201, 160, 74, 0.10);
+            --accent-glow: rgba(201, 160, 74, 0.07);
+            --code-bg: #0d0c14;
+            --sidebar-width: 420px;
+            --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+            --font-body: 'Spectral', Georgia, serif;
+            --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--font-body);
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 1.75;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+            position: relative;
+        }
+
+        /* Atmosphere: layered glow + film grain, behind all content */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            pointer-events: none;
+            background:
+                radial-gradient(720px 540px at 16% 6%, rgba(201, 160, 74, 0.07), transparent 62%),
+                radial-gradient(900px 760px at 108% 102%, rgba(80, 84, 120, 0.05), transparent 58%),
+                var(--bg);
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0.4;
+            mix-blend-mode: soft-light;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            background-size: 200px 200px;
+        }
+
+        ::selection {
+            background: rgba(201, 160, 74, 0.22);
+            color: var(--heading);
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-display);
+            color: var(--heading);
+            font-weight: 500;
+            font-optical-sizing: auto;
+            line-height: 1.18;
+        }
+
+        a { color: var(--accent); text-decoration: none; transition: color 0.18s ease; }
+        a:hover { color: var(--accent-bright); }
+
+        /* ---- LAYOUT: Sidebar + Main ---- */
+        .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: var(--sidebar-width);
+            height: 100vh;
+            background: linear-gradient(180deg, var(--bg-sidebar), #09090e);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 72px 48px 40px;
+            z-index: 10;
+        }
+
+        .sidebar-top {}
+
+        .sidebar h1 {
+            color: var(--heading);
+            font-size: 2.2em;
+            font-weight: 500;
+            font-variation-settings: 'opsz' 72;
+            letter-spacing: -0.015em;
+            line-height: 1.06;
+            margin-bottom: 12px;
+        }
+
+        .sidebar .role {
+            color: var(--text-secondary);
+            font-family: var(--font-mono);
+            font-size: 0.7em;
+            font-weight: 400;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            line-height: 1.6;
+            margin-bottom: 28px;
+        }
+
+        .tagline {
+            color: var(--accent);
+            font-family: var(--font-display);
+            font-style: italic;
+            font-size: 1.18em;
+            font-weight: 400;
+            font-variation-settings: 'opsz' 36;
+            line-height: 1.5;
+            margin-bottom: 44px;
+        }
+
+        /* Nav */
+        .sidebar nav {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .sidebar nav a {
+            color: var(--text-secondary);
+            font-family: var(--font-mono);
+            font-size: 0.74em;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: color 0.2s;
+        }
+
+        .sidebar nav a::before {
+            content: '';
+            display: block;
+            width: 28px;
+            height: 1px;
+            background: var(--text-secondary);
+            transition: width 0.28s ease, background 0.28s ease;
+        }
+
+        .sidebar nav a:hover,
+        .sidebar nav a.active {
+            color: var(--heading);
+        }
+
+        .sidebar nav a:hover::before,
+        .sidebar nav a.active::before {
+            width: 56px;
+            background: var(--accent);
+        }
+
+        /* Socials */
+        .sidebar-bottom {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .sidebar-bottom a {
+            color: var(--text-secondary);
+            transition: color 0.2s, transform 0.2s;
+        }
+
+        .sidebar-bottom a:hover {
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .sidebar-bottom svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        /* ---- MAIN CONTENT ---- */
+        .main {
+            margin-left: var(--sidebar-width);
+            flex: 1;
+            padding: 72px 80px 120px;
+            max-width: calc(100% - var(--sidebar-width));
+        }
+
+        .content {
+            max-width: 720px;
+        }
+
+        /* Section */
+        .section {
+            margin-bottom: 96px;
+        }
+
+        .section-label {
+            color: var(--text-secondary);
+            font-family: var(--font-mono);
+            font-size: 0.72em;
+            font-weight: 500;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .section-label::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            flex: none;
+            background: var(--accent);
+            transform: rotate(45deg);
+            box-shadow: 0 0 12px var(--accent-glow);
+        }
+
+        .section-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, var(--border), transparent);
+        }
+
+        /* ---- BLOG / ARTICLES ---- */
+        .article-card {
+            padding: 32px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            margin-bottom: 20px;
+            transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+            position: relative;
+        }
+
+        .article-card::before {
+            content: '';
+            position: absolute;
+            inset: 0 0 auto 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.04), transparent);
+            border-radius: 8px 8px 0 0;
+        }
+
+        .article-card:hover {
+            border-color: var(--border-hover);
+            box-shadow: 0 8px 30px var(--accent-glow);
+            transform: translateY(-2px);
+        }
+
+        .article-date {
+            color: var(--text-secondary);
+            font-family: var(--font-mono);
+            font-size: 0.75em;
+            letter-spacing: 0.04em;
+            margin-bottom: 10px;
+        }
+
+        .article-card h3 {
+            color: var(--heading);
+            font-size: 1.42em;
+            font-weight: 500;
+            line-height: 1.25;
+            margin-bottom: 12px;
+        }
+
+        .article-card h3 a {
+            color: var(--heading);
+        }
+
+        .article-card h3 a:hover {
+            color: var(--accent);
+        }
+
+        .article-excerpt {
+            color: var(--text);
+            font-size: 1em;
+            line-height: 1.7;
+        }
+
+        .article-tags {
+            margin-top: 16px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag {
+            font-family: var(--font-mono);
+            font-size: 0.68em;
+            letter-spacing: 0.03em;
+            color: var(--accent);
+            background: var(--accent-dim);
+            padding: 3px 10px;
+            border-radius: 4px;
+        }
+
+        /* ---- PROJECTS ---- */
+        .project {
+            padding: 24px 28px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            margin-bottom: 14px;
+            transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+        }
+
+        .project:hover {
+            border-color: var(--border-hover);
+            box-shadow: 0 8px 30px var(--accent-glow);
+            transform: translateY(-2px);
+        }
+
+        .project-header {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+
+        .project-name {
+            color: var(--heading);
+            font-family: var(--font-mono);
+            font-weight: 500;
+            font-size: 0.92em;
+        }
+
+        .project-sub {
+            color: var(--text-secondary);
+            font-size: 0.9em;
+        }
+
+        .project p {
+            font-size: 0.96em;
+            line-height: 1.7;
+            color: var(--text);
+        }
+
+        .project-links {
+            margin-top: 12px;
+        }
+
+        .project-links a {
+            font-family: var(--font-mono);
+            font-size: 0.78em;
+            margin-right: 16px;
+        }
+
+        .project-links a::after {
+            content: ' \2197';
+            opacity: 0.5;
+        }
+
+        .secondary-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-top: 14px;
+        }
+
+        .secondary-card {
+            padding: 20px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            transition: border-color 0.25s;
+        }
+
+        .secondary-card:hover { border-color: var(--border-hover); }
+
+        .secondary-card .project-name { font-size: 0.85em; margin-bottom: 6px; }
+        .secondary-card p { font-size: 0.88em; color: var(--text-secondary); line-height: 1.6; }
+
+        /* ---- RESUME ---- */
+        .resume-entry {
+            display: grid;
+            grid-template-columns: 140px 1fr;
+            gap: 24px;
+            padding: 24px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .resume-entry:last-child { border-bottom: none; }
+
+        .resume-date {
+            color: var(--text-secondary);
+            font-family: var(--font-mono);
+            font-size: 0.75em;
+            padding-top: 6px;
+            white-space: nowrap;
+        }
+
+        .resume-body h3 {
+            color: var(--heading);
+            font-size: 1.12em;
+            font-weight: 500;
+            margin-bottom: 2px;
+        }
+
+        .resume-company {
+            color: var(--accent);
+            font-family: var(--font-display);
+            font-style: italic;
+            font-size: 1em;
+            font-weight: 400;
+            margin-bottom: 8px;
+        }
+
+        .resume-body p {
+            font-size: 0.94em;
+            line-height: 1.7;
+            color: var(--text);
+        }
+
+        .resume-skills {
+            margin-top: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .resume-skills .tag {
+            font-size: 0.66em;
+            color: var(--text-secondary);
+            background: transparent;
+            border: 1px solid var(--border);
+        }
+
+        /* Education */
+        .edu-entry {
+            padding: 16px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .edu-entry:last-child { border-bottom: none; }
+
+        .edu-entry h3 {
+            color: var(--heading);
+            font-size: 1.08em;
+            font-weight: 500;
+        }
+
+        .edu-entry p {
+            color: var(--text-secondary);
+            font-size: 0.9em;
+        }
+
+        /* Award */
+        .award {
+            padding: 22px 26px;
+            background: linear-gradient(120deg, var(--surface), rgba(201, 160, 74, 0.04));
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--accent);
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 16px;
+        }
+
+        .award h3 {
+            color: var(--heading);
+            font-size: 1.1em;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .award p {
+            color: var(--text);
+            font-size: 0.92em;
+            line-height: 1.65;
+        }
+
+        .award .award-issuer {
+            color: var(--text-secondary);
+            font-family: var(--font-mono);
+            font-size: 0.78em;
+            letter-spacing: 0.02em;
+        }
+
+        /* ---- FULL ARTICLE ---- */
+        .article-full {
+            max-width: 680px;
+        }
+
+        .article-full > h3 {
+            font-size: 1.95em;
+            font-weight: 500;
+            font-variation-settings: 'opsz' 72;
+            letter-spacing: -0.012em;
+        }
+
+        .article-full h2 {
+            color: var(--heading);
+            font-size: 1.5em;
+            font-weight: 500;
+            margin: 48px 0 16px;
+            letter-spacing: -0.01em;
+            text-transform: none;
+        }
+
+        .article-full p {
+            margin-bottom: 18px;
+            font-size: 1.06em;
+            line-height: 1.85;
+        }
+
+        .article-full > p:first-of-type::first-letter {
+            font-family: var(--font-display);
+            float: left;
+            font-size: 3.6em;
+            line-height: 0.76;
+            font-weight: 500;
+            font-variation-settings: 'opsz' 144;
+            padding: 0.04em 0.12em 0 0;
+            color: var(--accent);
+        }
+
+        .article-full a {
+            text-decoration: underline;
+            text-decoration-color: var(--accent-dim);
+            text-underline-offset: 3px;
+            transition: color 0.18s, text-decoration-color 0.18s;
+        }
+
+        .article-full a:hover {
+            text-decoration-color: var(--accent-bright);
+        }
+
+        .article-full code {
+            font-family: var(--font-mono);
+            font-size: 0.82em;
+            background: var(--code-bg);
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: var(--accent);
+        }
+
+        .article-full pre {
+            background: var(--code-bg);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 20px 24px;
+            margin: 24px 0;
+            overflow-x: auto;
+            font-family: var(--font-mono);
+            font-size: 0.8em;
+            line-height: 1.65;
+            color: var(--text);
+        }
+
+        .article-full pre code {
+            background: none;
+            padding: 0;
+            color: inherit;
+            font-size: 1em;
+        }
+
+        .article-full strong {
+            color: var(--heading);
+            font-weight: 500;
+        }
+
+        /* Tables inside the featured article */
+        .article-full table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 28px 0;
+            font-size: 0.92em;
+            line-height: 1.6;
+        }
+
+        .article-full th,
+        .article-full td {
+            border: 1px solid var(--border);
+            padding: 10px 13px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .article-full th {
+            color: var(--heading);
+            font-family: var(--font-mono);
+            font-size: 0.82em;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+            background: var(--surface);
+        }
+
+        .article-full td code {
+            font-size: 0.92em;
+        }
+
+        .article-full .article-footer {
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+            font-size: 0.92em;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        /* ---- PAGE-LOAD REVEAL ---- */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: none; }
+        }
+
+        .sidebar h1,
+        .sidebar .role,
+        .tagline,
+        .sidebar nav,
+        .sidebar-bottom,
+        .main .section {
+            opacity: 0;
+            animation: fadeUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+
+        .sidebar h1 { animation-delay: 0.05s; }
+        .sidebar .role { animation-delay: 0.13s; }
+        .tagline { animation-delay: 0.22s; }
+        .sidebar nav { animation-delay: 0.32s; }
+        .sidebar-bottom { animation-delay: 0.44s; }
+        .main .section:nth-of-type(1) { animation-delay: 0.38s; }
+        .main .section:nth-of-type(2) { animation-delay: 0.50s; }
+        .main .section:nth-of-type(3) { animation-delay: 0.62s; }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            .sidebar h1,
+            .sidebar .role,
+            .tagline,
+            .sidebar nav,
+            .sidebar-bottom,
+            .main .section {
+                opacity: 1;
+                animation: none;
+                transform: none;
+            }
+        }
+
+        /* ---- RESPONSIVE ---- */
+        @media (max-width: 1024px) {
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+                border-right: none;
+                border-bottom: 1px solid var(--border);
+                padding: 48px 32px 32px;
+            }
+            .main {
+                margin-left: 0;
+                max-width: 100%;
+                padding: 48px 32px 80px;
+            }
+            .layout { flex-direction: column; }
+            .resume-entry {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+        }
+
+        @media (max-width: 540px) {
+            body { font-size: 15px; }
+            .sidebar { padding: 32px 20px 24px; }
+            .sidebar h1 { font-size: 1.9em; }
+            .main { padding: 32px 20px 60px; }
+            .secondary-grid { grid-template-columns: 1fr; }
+            .article-card { padding: 24px 20px; }
+            .article-full > h3 { font-size: 1.55em; }
+            .article-full > p:first-of-type::first-letter { font-size: 3em; }
+        }
+    </style>
+</head>
+<body>
+    <div class="layout">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-top">
+                <h1>Eren Can Sinecan</h1>
+                <div class="role">Backend, DevOps, AI Agent Infrastructure Engineer</div>
+                <div class="tagline">Most problems are devex problems.<br>The developer isn't always human.</div>
+
+                <nav>
+                    <a href="#blog" class="active">Blog</a>
+                    <a href="#projects">Projects</a>
+                    <a href="#resume">Resume</a>
+                </nav>
+            </div>
+
+            <div class="sidebar-bottom">
+                <a href="https://github.com/esinecan" aria-label="GitHub">
+                    <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                </a>
+                <a href="https://www.linkedin.com/in/esinecan" aria-label="LinkedIn">
+                    <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                </a>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main">
+            <div class="content">
+
+                <!-- BLOG -->
+                <section id="blog" class="section">
+                    <div class="section-label">Blog</div>
+
+                    <!-- FEATURED ARTICLE: Somatic RAG -->
+                    <article class="article-full">
+                        <div class="article-date">May 2026</div>
+                        <h3 style="color: var(--heading); font-size: 1.4em; font-weight: 600; margin-bottom: 8px; line-height: 1.3;">You Can't Retrieve What You Don't Know You're Missing</h3>
+                        <div class="article-tags" style="margin-bottom: 32px;">
+                            <span class="tag">Agents</span>
+                            <span class="tag">Memory</span>
+                            <span class="tag">MCP</span>
+                            <span class="tag">Hooks</span>
+                        </div>
+
+                        <p>There is a field in one of the systems I work on that has been deprecated for years and comes back empty every single time you read it. But it is named in such a way that every agent thinks that is the one field that they should really really focus on. And it's always empty! Thus, the agent declares it's the wrong environment and starts searching for the correct one among the local containers, tries to see if it assumed the wrong launch config, and basically goes tokenmaxxing on a wild goose chase.</p>
+
+                        <p>The agent did nothing dumb, but still failed. The field had a name that sounded like it mattered, so it used it. "But is this secretly deprecated tho?" was missing from the agent's idea of what questions were worth asking. This would get a human maybe once or twice tops. But it will get the poor agent every time I don't end the prompt with "...and watch for that field. It's deprecated but not marked as such". This is basically how you get the next HAL, the next Skynet, the next Butlerian Jihad...</p>
+
+                        <p>This is a long standing problem, because it is the one that no amount of better retrieval fixes, and almost everyone building agent memory right now is building better retrieval. We the agentic AI gourmands, have a tendency towards bit of a herd mentality. The sheer volume of buzz surrounding LLMs often turns a reasonable sounding hypothesis into an assumed fact, cascading into widespread architectural fallacies.</p>
+
+                        <p>We have seen this happen with RAG, people assumed if there is enough cosine similarity (or HNSW with closest neighbors etc.) the relevant parts of context would elegantly surface. When this did not happen, it was "RAG is dead" or "Graph RAG is everything". In the process, RAG has changed meanings from simply augmenting the generation via retrieval, to using graph or vector searches with each prompt.</p>
+
+                        <p>Ultimately the puzzle of retrieving the context that the agent doesn't know that it doesn't know, has not been solved as of yet. I didn't solve it either. But I will propose a design pattern, that I believe to be quietly and spontaneously climbing its way towards becoming the de facto standard. I will lay it out along with a lightweight library, that will enable you to personally observe why this pattern is empirically sound.</p>
+
+                        <h2>Unknown unknowns</h2>
+
+                        <p>I'm but a humble dev, and far be it from me to criticize Karpathy the magnifique. But he can at times be a great trigger of the herd mentality. He has recently come up with a lovely knowledge management paradigm called "LLM Wiki", a fairly decent pattern that hinges on 3 feet. Ingestion, querying and gardening. This 3 prong scheme has a glaring weakness that I'd like to criticize. This requires the agent to initiate the querying. The agent realizes it is unsure about something, forms a query, calls a tool, gets context back, carries on. Vector store, knowledge graph, grep over a notes folder, a Jira MCP, it does not matter. The pattern is the same. The agent decides it has a gap, then goes and fills it.</p>
+
+                        <p>There is a precondition buried in that loop: the agent has to know the gap is there to <strong>pull</strong>. While recent models have shown improvement in this regard, you just can't rely on them as of now. LLMs are still notorious for just making up the gap. If a model sees "topic" and "publish" in your docs without explicitly naming the technology, it assumes Kafka and is like, "GCP who?". If it is supposed to pull a DLQ entry, it will waste a quarter of its context window trying to figure out the Kafka setup. Possibly even conclude the implementation is missing and start to implement one.</p>
+
+                        <p>The half that is missing then, is <strong>push</strong>: something that finds the fact the agent lacks and injects it in the background. Something that will ask "Oh are we doing CQRS? Alright let me go find out about the messaging architecture".</p>
+
+                        <h2>Somatic memory with hooks</h2>
+
+                        <p>Firstly, we need to briefly explore what hooks are. Hooks are runtime events that the harness exposes. These are usually things like "Stop" where the LLM finishes responding or "UserSubmitPrompt" which fires when the user sends the prompt, but before it reaches the model. The user can attach executables to these events. These executables "automatically" run without intentional invocation by the agent. For instance, every time my model makes a tool call, a programlet can check if it contains banned commands. Or on SessionEnd, I can upload the conversation to somewhere.</p>
+
+                        <p>Just as MCP protocol has become the standard for <strong>pull</strong> oriented tools, an emerging surface for <strong>push</strong> tooling is the hooks that are exposed by most harnesses. We will be utilizing both. Anthropic first published the MCP standard, now it looks like their hooks are becoming the standard. Below is a table for foremost legacy harnesses and a few recent up and coming ones, that adopt hooks with some divergence in their standards:</p>
+
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Harness</th>
+                                    <th>Cohort</th>
+                                    <th>User Submit hook equivalent</th>
+                                    <th>Wire contract vs Claude Code</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Claude Code (Anthropic)</td>
+                                    <td>established</td>
+                                    <td><code>UserPromptSubmit</code></td>
+                                    <td>original gangster</td>
+                                </tr>
+                                <tr>
+                                    <td>Codex CLI (OpenAI) / Qwen Code (Alibaba)</td>
+                                    <td>established / 2026</td>
+                                    <td><code>UserPromptSubmit</code></td>
+                                    <td>adopt it wholesale</td>
+                                </tr>
+                                <tr>
+                                    <td>Gemini CLI (Google)</td>
+                                    <td>established</td>
+                                    <td><code>BeforeAgent</code></td>
+                                    <td>adopts it, renames the events</td>
+                                </tr>
+                                <tr>
+                                    <td>Cursor (Anysphere)</td>
+                                    <td>established</td>
+                                    <td><code>beforeSubmitPrompt</code></td>
+                                    <td>its own vocabulary but maps to it</td>
+                                </tr>
+                                <tr>
+                                    <td>pi (Mario Zechner)</td>
+                                    <td>2026 newcomer</td>
+                                    <td><code>input</code> (<code>pi.on("input")</code>, can rewrite the prompt)</td>
+                                    <td>its own JS extension API, not stdin but adaptable</td>
+                                </tr>
+                                <tr>
+                                    <td>CodeWhale (formerly deepseek-tui)</td>
+                                    <td>2026 newcomer</td>
+                                    <td><code>message_submit</code></td>
+                                    <td>adopting it now (issue #1364)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <p>Look down that last column. An increasing percentage of harnesses either takes Claude Code's wire format wholesale or with a new vocabulary onto it, the most divergent example being pi. When I looked at the 7 of the high popularity harnesses that came out in 2026, I found 5 of them have hooks comparable to Anthropic's. The rate drops the earlier you go. So this is something of an "underground" movement among the cooler people for now.</p>
+
+                        <p>What makes it worth pointing at is how little noise it made on the way in. MCP arrived with a campaign behind it. "USB-C for LLMs" was the line, it was a good line, and within a season not adopting MCP had started to look like a decision you would be asked to defend. Hooks got none of that, no "this is now the standard", and the harnesses settled on Claude Code's contract regardless, one after another, each of them arriving at the same need on its own. An "emergent" standard, where human was very much in the loop.</p>
+
+                        <p>That retrieval step is a free variable. It can be grep over a folder of markdown, a vector store, a knowledge graph, or a NotebookLM instance that is filled with the past chats. Swap one for another and nothing above it has to move. You have your body of knowledge and a sense of what the unknown unknowns can be. The design pattern around it can be relatively stable. In fact, let us do a minimal hands on experiment with it.</p>
+
+                        <h2>A small library you can run</h2>
+
+                        <p>Back near the top I promised a small library you could run yourself to watch the pattern in operation. It is at: <a href="https://github.com/esinecan/somatic-memory">github.com/esinecan/somatic-memory</a></p>
+
+                        <p>It is called somatic-memory for now. Not the best name since the MCP half of it is opposite of somatic. Somatic systems of the body work without our conscious input. The speed of your pulse increases as your muscle output does. It doesn't require you to think "Let me send more blood to my calves". Your iris reacts to light.</p>
+
+                        <p>Which is why only one of the two components fits the name. The hook is truly "somatic". It fires on your prompt and pushes context in before the model reads a word, no action from the model needed. Like the iris reacting to light. But we do also squint when it's too bright right? The other component is a plain MCP tool called recall, and the agent reaches for it the moment it knows it has a gap. That one is a deliberate, conscious query, the exact opposite of somatic (agentic?), and corresponds to the squint.</p>
+
+                        <p>In the end, all this engine does one small thing: given the conversation, hand back what is relevant. Because it only reads and never writes, the thing it reads from is entirely up to you: a folder, a vault, a database, a live search. The library calls each one an oracle. Treat them as scaffolding for your customizations. Although the ones besides Web oracle are legitimately usable as is.</p>
+
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Oracle</th>
+                                    <th>What it reads</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>filesystem</td>
+                                    <td>a folder of text files, the zero-config default</td>
+                                </tr>
+                                <tr>
+                                    <td>obsidian</td>
+                                    <td>the same, plus it follows wikilinks one hop into linked notes you never searched for</td>
+                                </tr>
+                                <tr>
+                                    <td>sqlite</td>
+                                    <td>full-text search over a database something else filled</td>
+                                </tr>
+                                <tr>
+                                    <td>web</td>
+                                    <td>a live search fetch, for a source you neither own nor wrote</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <p>Swap one row for another and nothing above it has to change. That is the free variable from earlier. I point my own setup at a cloud notebook I already keep, NotebookLM as it happens, but the filesystem oracle needs no cloud and no account at all. The plainest version is grep over a folder of notes, and that already does most of the work. A surprisingly effective way that I will always stand by.</p>
+
+                        <h2>The design space</h2>
+
+                        <p>The library above is aimed being the simplest representation of a design pattern. To me, contextsmithing via harness hooks (setting aside "which hook" question) have 4 basic axes. These are immediate angles to fork and tailor the project above for yourself:</p>
+
+                        <p>1. <strong>Personal against institutional:</strong> A continuity setup remembers one person across their own sessions and harnesses, the daemon that has been reading over your shoulder for months. An institutional one holds what a team or an org knows, the shared store every member's agents read from. The engine is the same. What changes is whose memory it is and who it answers for.</p>
+
+                        <p>2. <strong>Cloud against local:</strong> The oracle can be a hosted thing you query over the network, a cloud notebook or a managed database, or it can be a folder of files on your own disk that you search with grep. Nothing in the pattern prefers one. A simple folder somewhere in C:/, containing just a bunch of lowly, barely past stone age txt files, that get ripgrepped, synthesized and pushed to the main agent's context in a "somatic" manner, is genuinely surprisingly beneficial.</p>
+
+                        <p>3. <strong>Read only against bidirectional:</strong> Everything so far only reads. A bidirectional version also writes, noticing when you correct the agent and keeping that lesson for next time. The write path is where the real difficulty lives, telling a genuine correction from a passing change of mind and keeping the store from rotting as it fills, which is why it is a later piece and not this one.</p>
+
+                        <p>4. <strong>Sync against async:</strong> A sync hook blocks the prompt going to LLM until the context is assembled. An async one fires and lets the context arrive some time (depending on what you're having it do) later, while the agent is already working. A fully autonomous run, no human, can afford to block, and blocking means the agent does not start down a wrong path. But in interactive sessions a non-blocking somatic retrieval would be the smarter choice. The past context maybe arrives a little later in the background. I can afford that while I am actively monitoring.</p>
+
+                        <p>A fair worry at this point is cost. A fresh retrieval pass on every prompt sounds like a lot. The push agent's brain is yours to size, though. At the cheap end it is regex and heuristic tomfoolery that never calls a model at all. At the other end it is the most capable, most "too dangerous to ship" frontier model you can find. Cost and speed move with that choice.</p>
+
+                        <p>This is just one framing of the architecture, and probably not a complete one. None of the four axes has a default answer either. At work you might want the whole team sharing a cloud, knowledge-graph oracle that can also do backflips. For your very first home assistant, a filesystem ripgrep that returns thirty lines on either side of each hit could be plenty.</p>
+
+                        <p>The middle ground keeps getting cheaper. Slotting in a small local model to run smarter searches used to be a luxury, but with capable local models everywhere now it often costs less than letting the main model go exploring on its own. Let's walk through a couple of concrete setups:</p>
+
+                        <p>My home setup could be categorized as "personal, cloud, unidirectional, async" based on these axes. For home PCs of myself and my wife, I have notebooklm instances that are asked up to 3 questions by a Deepseek agent who interpreted the whole context. Once its questions are answered, same Deepseek agent synthesizes its tips and injects back into context between "&lt;subconscious&gt;" tags. It's a rather hefty one but it's great at creating the UX of one continuous identity. The agent only does read only stuff. Our chats are wholesale ingested into NotebookLM instances by a separate cron job.</p>
+
+                        <p>When I was going to write this article, I scoured the land for similar architectures. It was a great sanity check to find Tomaz Bratanic's <a href="https://towardsdatascience.com/unified-agentic-memory-across-harnesses-using-hooks/">Neo4j based setup</a> that has a very similar design. I can sense the 4 axes in his thinking as well: "personal, local, bidirectional, and sync". It is personal in the same sense mine is, one developer's memory carried across Claude Code, Codex and Cursor. It is local, a Neo4j DB he runs himself instead of a hosted service. He has a "dream phase" implementation that corresponds to linting and ingestion phases of Papa Karpathy's "LLM Wiki" but similar to mine, it is decoupled from the hook + mcp remembering architecture, but because his hooks log every event into Neo4j, it is bidirectional.</p>
+
+                        <p>I have also found some fellow travelers in CodeWhale. I liked it quite a lot as a community driven tool and wanted to try out, but its hooks could watch a user message go by without changing it, so the somatic injection I lean on elsewhere had no clean way in. So I filed an issue (<a href="https://github.com/Hmbown/CodeWhale/issues/1364">#1364</a>) asking for two things: a message_submit hook that can actually rewrite the text before it reaches the model, and a turn-end event for the fire-and-forget critique pass. What happened next was the encouraging part. The maintainer (<a href="https://github.com/Hmbown">Hmbown</a>) agreed it made sense, another contributor (<a href="https://github.com/LeXwDeX">LeXwDeX</a>) argued the hook layer should just mirror Claude Code's contract one to one, a third (<a href="https://github.com/AresNing">AresNing</a>) wrote the first implementation, and within weeks the maintainer put it together into a PR. I did not have to push any of it along. The thread filled up with people who already wanted the same thing, which is that quiet convergence from the table happening right in front of me, one human-in-the-loop decision at a time.</p>
+
+                        <p>Pull already has a name, agentic RAG, and the MCP tool in here is exactly that, kept for every time the agent does know it has a gap. The push half never got one, neglected maybe in the backwash of semantic RAG disillusionment. I call it somatic RAG. Agentic RAG, meet your other half. My setup runs both against the same memory stores, and I do not read them as a trade-off.</p>
+
+                        <p>So go back to that field from the start. The agent that burned a third of its window chasing the wrong environment was not stupid and was not short on retrieval. It failed because the one fact that would have saved it, that the field is dead and comes back empty, was never in its idea of what to ask. No bigger window and no better embedding reaches that, because the query never fires. The only thing that reaches it is something already watching the conversation, probing near that fact, ready to rush it back the moment it surfaces. You cannot retrieve what you do not know you are missing. Something else has to push it to you.</p>
+
+                        <p>This skeleton will get converged on from a lot of directions, with write-back, team versions, gardeners and ontologies layered on top. The code is at the repo, the name is a placeholder, and there is nothing to install. Clone it, point it at a folder of your own notes, and wait for it to surprise you with some nuance you forgot you knew.</p>
+
+                        <div class="article-footer">
+                            The code is at <a href="https://github.com/esinecan/somatic-memory">github.com/esinecan/somatic-memory</a>. The name is a placeholder, and there is nothing to install.
+                        </div>
+                    </article>
+
+                    <!-- Previous article card: MCP Inspector -->
+                    <div class="article-card">
+                        <div class="article-date">April 2026</div>
+                        <h3><a href="/mcp-inspector.html">An MCP tool to let AI debug any MCP server on the fly</a></h3>
+                        <p class="article-excerpt">An MCP server that connects to other MCP servers, so the AI assistant can test and debug them from inside the same conversation. 400 lines of TypeScript, one dependency.</p>
+                        <div class="article-tags">
+                            <span class="tag">MCP</span>
+                            <span class="tag">TypeScript</span>
+                            <span class="tag">Meta-Tooling</span>
+                            <span class="tag">DevEx</span>
+                        </div>
+                    </div>
+
+                    <!-- Previous article card -->
+                    <div class="article-card">
+                        <div class="article-date">Jul 2025</div>
+                        <h3><a href="https://www.linkedin.com/pulse/llm-intern-fallacy-eren-can-sinecan-5gh5e/">The LLM as Intern Fallacy</a></h3>
+                        <p class="article-excerpt">Why treating LLMs as junior developers who need supervision misses the architectural point entirely. They're not interns. They're power tools that need jigs.</p>
+                        <div class="article-tags">
+                            <span class="tag">AI</span>
+                            <span class="tag">Architecture</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- PROJECTS -->
+                <section id="projects" class="section">
+                    <div class="section-label">Projects</div>
+
+                    <div class="project">
+                        <div class="project-header">
+                            <span class="project-name">mcp-inspector-as-mcp-server</span>
+                            <span class="project-sub">Meta-tool for MCP development</span>
+                        </div>
+                        <p>An MCP server that connects to other MCP servers, enabling AI assistants to test, debug, and iterate on tool implementations from inside the conversation. Persistent sessions, event ring buffer, and human-in-the-loop steering. 400 lines, one dependency.</p>
+                        <div class="project-links">
+                            <a href="https://github.com/esinecan/mcp-inspector-as-mcp-server">GitHub</a>
+                            <a href="/mcp-inspector.html">Article</a>
+                        </div>
+                    </div>
+
+                    <div class="project">
+                        <div class="project-header">
+                            <span class="project-name">agentic-ai-browser</span>
+                            <span class="project-sub">Autonomous browser agent</span>
+                        </div>
+                        <p>LLM-powered web automation with DOM snapshot pruning for context management. Single-agent architecture. Won "Most Innovative Project" at the 2025 Agentic AI Innovation Challenge. 162 stars.</p>
+                        <div class="project-links">
+                            <a href="https://github.com/esinecan/agentic-ai-browser">GitHub</a>
+                        </div>
+                    </div>
+
+                    <div class="project">
+                        <div class="project-header">
+                            <span class="project-name">skynet-agent</span>
+                            <span class="project-sub">Digital proto-individual</span>
+                        </div>
+                        <p>Autonomous AI agent with dual-layer memory (passive RAG + conscious volitional), Neo4j knowledge graph, and a secondary "motivator" agent that tasks the model with self-maintenance when idle. 128 stars.</p>
+                        <div class="project-links">
+                            <a href="https://github.com/esinecan/skynet-agent">GitHub</a>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- RESUME -->
+                <section id="resume" class="section">
+                    <div class="section-label">Resume</div>
+
+                    <!-- Award -->
+                    <div class="award">
+                        <h3>Most Innovative AI Project</h3>
+                        <p class="award-issuer">Ready Tensor, Agentic AI Innovation Challenge -- April 2025</p>
+                        <p>Adaptive Autonomous AI Co-Browser. Recognized for innovation in autonomous web agents, local-first architecture, and human-in-the-loop agentic workflows. Selected among global submissions.</p>
+                    </div>
+
+                    <div style="margin-bottom: 48px;"></div>
+
+                    <!-- Experience -->
+                    <div class="section-label">Experience</div>
+
+                    <div class="resume-entry">
+                        <div class="resume-date">2025 -- Present</div>
+                        <div class="resume-body">
+                            <h3>Senior Engineer</h3>
+                            <div class="resume-company">Forto -- Berlin</div>
+                            <p>Pricing engine infrastructure for freight logistics. Weight bracket matching, partial quote integration, depot rate selection, local charges and customs. 80+ PRs across rates-management, pricing engine, and TMS. Created Faro MCP (312 tools from 16 service APIs) and Cortex-EM/PM for engineering workflow automation. 100+ code reviews.</p>
+                            <div class="resume-skills">
+                                <span class="tag">TypeScript</span>
+                                <span class="tag">NestJS</span>
+                                <span class="tag">MongoDB</span>
+                                <span class="tag">AWS</span>
+                                <span class="tag">Kubernetes</span>
+                                <span class="tag">MCP</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="resume-entry">
+                        <div class="resume-date">2025</div>
+                        <div class="resume-body">
+                            <h3>AI & Backend Engineer</h3>
+                            <div class="resume-company">Freelance -- Berlin</div>
+                            <p>Contract work bridging backend infrastructure and AI agent systems. Built agentic-ai-browser (162 stars, award-winning) and began skynet-agent. RAG pipelines, LangChain orchestration, AWS infrastructure.</p>
+                            <div class="resume-skills">
+                                <span class="tag">Java</span>
+                                <span class="tag">Spring Boot</span>
+                                <span class="tag">LangChain</span>
+                                <span class="tag">RAG</span>
+                                <span class="tag">AWS</span>
+                                <span class="tag">React</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="resume-entry">
+                        <div class="resume-date">2019 -- 2025</div>
+                        <div class="resume-body">
+                            <h3>Senior Backend Developer</h3>
+                            <div class="resume-company">CompuGroup Medical -- Berlin</div>
+                            <p>Led monolith-to-microservices decomposition across Spring Boot and Kafka. Migrated messaging from ActiveMQ to Kafka. Established CI/CD pipelines with Jenkins and Kubernetes, cutting deployment cycles by 40%. Built ELK dashboards for incident detection.</p>
+                            <div class="resume-skills">
+                                <span class="tag">Java</span>
+                                <span class="tag">Spring Boot</span>
+                                <span class="tag">Kafka</span>
+                                <span class="tag">Kubernetes</span>
+                                <span class="tag">AWS</span>
+                                <span class="tag">ELK</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="resume-entry">
+                        <div class="resume-date">2017 -- 2019</div>
+                        <div class="resume-body">
+                            <h3>Backend Developer</h3>
+                            <div class="resume-company">Giata GmbH -- Berlin</div>
+                            <p>Transformed PHP monolith into Node.js microservices, cutting page load times from 2s to under 1s. Automated AWS CloudFormation processes. RabbitMQ for service communication.</p>
+                            <div class="resume-skills">
+                                <span class="tag">Node.js</span>
+                                <span class="tag">TypeScript</span>
+                                <span class="tag">AWS</span>
+                                <span class="tag">RabbitMQ</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="resume-entry">
+                        <div class="resume-date">2016 -- 2017</div>
+                        <div class="resume-body">
+                            <h3>Java Microservices Engineer</h3>
+                            <div class="resume-company">AUTO1 Group -- Berlin</div>
+                            <p>Spring Cloud microservice architecture. Implemented ELK-based monitoring, reducing root-cause analysis time from days to hours.</p>
+                            <div class="resume-skills">
+                                <span class="tag">Java</span>
+                                <span class="tag">Spring Cloud</span>
+                                <span class="tag">ELK</span>
+                                <span class="tag">AWS</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="resume-entry">
+                        <div class="resume-date">2015 -- 2016</div>
+                        <div class="resume-body">
+                            <h3>Head of Engineering</h3>
+                            <div class="resume-company">Molto DS -- Istanbul</div>
+                            <p>Led engineering for first product using MEAN Stack, Docker, and Azure. Implemented testing frameworks with Jasmine and Karma.</p>
+                            <div class="resume-skills">
+                                <span class="tag">Node.js</span>
+                                <span class="tag">MongoDB</span>
+                                <span class="tag">Docker</span>
+                                <span class="tag">Azure</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="resume-entry">
+                        <div class="resume-date">2013 -- 2015</div>
+                        <div class="resume-body">
+                            <h3>Senior Software Engineer</h3>
+                            <div class="resume-company">Garanti Teknoloji -- Istanbul</div>
+                            <p>Web applications for pension customers and insurance sales using AngularJS and Spring MVC. Reporting systems. Internal knowledge sharing portal.</p>
+                            <div class="resume-skills">
+                                <span class="tag">Java</span>
+                                <span class="tag">Spring MVC</span>
+                                <span class="tag">AngularJS</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="resume-entry">
+                        <div class="resume-date">2011 -- 2013</div>
+                        <div class="resume-body">
+                            <h3>Software Development Specialist</h3>
+                            <div class="resume-company">Bilge Adam / Veripark -- Istanbul</div>
+                            <p>Enterprise portals for Borusan Automotive and Borusan Holding. Internet banking application with J2EE, JSF, and Oracle.</p>
+                            <div class="resume-skills">
+                                <span class="tag">Java</span>
+                                <span class="tag">J2EE</span>
+                                <span class="tag">Oracle</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 48px;"></div>
+
+                    <!-- Education -->
+                    <div class="section-label">Education</div>
+
+                    <div class="edu-entry">
+                        <h3>Koc University</h3>
+                        <p>BS Computer Engineering (Full Merit Scholarship) -- 2005-2011</p>
+                    </div>
+
+                    <div class="edu-entry">
+                        <h3>Izmir High School of Science</h3>
+                        <p>2002-2005</p>
+                    </div>
+
+                    <div style="margin-top: 48px;"></div>
+
+                    <!-- Languages -->
+                    <div class="section-label">Languages</div>
+                    <div style="display: flex; gap: 32px; font-size: 0.9em;">
+                        <div><strong style="color: var(--heading);">Turkish</strong> <span style="color: var(--text-secondary);">Native</span></div>
+                        <div><strong style="color: var(--heading);">English</strong> <span style="color: var(--text-secondary);">Full professional</span></div>
+                        <div><strong style="color: var(--heading);">German</strong> <span style="color: var(--text-secondary);">Conversational</span></div>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Scroll spy for nav highlight -->
+    <script>
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.sidebar nav a');
+
+        function updateNav() {
+            const scrollY = window.scrollY + 120;
+            let current = '';
+            sections.forEach(s => {
+                if (s.offsetTop <= scrollY) current = s.id;
+            });
+            navLinks.forEach(link => {
+                link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+            });
+        }
+
+        window.addEventListener('scroll', updateNav, { passive: true });
+        updateNav();
+    </script>
+</body>
+</html>
