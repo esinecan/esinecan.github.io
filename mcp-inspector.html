@@ -3,20 +3,153 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23008080'/%3E%3Crect x='2' y='2' width='12' height='9' fill='%23c0c0c0'/%3E%3Crect x='3' y='3' width='10' height='2' fill='%23000080'/%3E%3Crect x='3' y='6' width='10' height='4' fill='%23ffffff'/%3E%3Crect x='5' y='12' width='6' height='2' fill='%23c0c0c0'/%3E%3C/svg%3E">
 <title>An MCP tool to let AI debug any MCP server on the fly</title>
 <meta name="description" content="An MCP server that connects to other MCP servers, so the AI assistant can test and debug them from inside the same conversation.">
-<!-- This article now lives inside the desktop. Send visitors to the deep link. -->
-<meta http-equiv="refresh" content="0; url=/#mcp-inspector">
-<link rel="canonical" href="/#mcp-inspector">
+<link rel="canonical" href="https://esinecan.com/mcp-inspector.html">
+<meta property="og:title" content="An MCP tool to let AI debug any MCP server on the fly">
+<meta property="og:description" content="An MCP server that connects to other MCP servers, so the AI assistant can test and debug them from inside the same conversation.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://esinecan.com/mcp-inspector.html">
+<meta name="twitter:card" content="summary">
 <style>
-  html,body{margin:0;height:100%;background:#008080;color:#fff;
-    font-family:Tahoma,"MS Sans Serif",sans-serif;font-size:13px;}
-  .c{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;}
-  a{color:#fff;}
+  @font-face{
+    font-family:'PxSans';
+    src:url('https://cdn.jsdelivr.net/npm/98.css@0.1.20/dist/ms_sans_serif.woff') format('woff');
+    font-weight:normal; font-display:swap;
+  }
+  @font-face{
+    font-family:'PxSans';
+    src:url('https://cdn.jsdelivr.net/npm/98.css@0.1.20/dist/ms_sans_serif_bold.woff') format('woff');
+    font-weight:bold; font-display:swap;
+  }
+  :root{
+    --face:#c0c0c0; --hi:#ffffff; --hi2:#dfdfdf;
+    --shadow:#808080; --shadow2:#000000;
+    --title:#000080; --title2:#1084d0;
+    --desktop:#008080; --link:#0000ee;
+  }
+  *{box-sizing:border-box;}
+  html,body{height:100%;}
+  body{
+    margin:0; background:var(--desktop);
+    font-family:'PxSans',Tahoma,"MS Sans Serif","Segoe UI",sans-serif;
+    font-size:11px; color:#000;
+    display:flex; justify-content:center;
+    padding:14px 10px;
+  }
+  .window{
+    background:var(--face);
+    width:100%; max-width:720px;
+    height:calc(100vh - 28px);
+    display:flex; flex-direction:column;
+    padding:3px;
+    box-shadow:
+      inset -1px -1px 0 0 var(--shadow2),
+      inset  1px  1px 0 0 var(--hi),
+      inset -2px -2px 0 0 var(--shadow),
+      inset  2px  2px 0 0 var(--hi2);
+  }
+  .title-bar{
+    height:20px;
+    background:linear-gradient(90deg,var(--title),var(--title2));
+    display:flex; align-items:center;
+    padding:0 2px 0 3px; flex:0 0 auto;
+  }
+  .title-bar-text{
+    color:#fff; font-weight:bold; font-size:11px;
+    display:flex; align-items:center; gap:4px;
+    flex:1 1 auto; overflow:hidden; white-space:nowrap; text-overflow:ellipsis;
+  }
+  .title-bar-text svg{width:16px;height:16px;flex:0 0 16px;}
+  .title-bar-controls{display:flex; gap:2px;}
+  .tb-btn{
+    width:16px; height:14px; background:var(--face);
+    box-shadow:
+      inset -1px -1px 0 0 var(--shadow2),
+      inset  1px  1px 0 0 var(--hi),
+      inset -2px -2px 0 0 var(--shadow),
+      inset  2px  2px 0 0 var(--hi2);
+    font-size:9px; line-height:1; color:#000; text-decoration:none;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .menustrip{ display:flex; padding:1px 2px; flex:0 0 auto; }
+  .menustrip span{ padding:1px 7px; }
+  .menustrip span:hover{ background:var(--title); color:#fff; }
+  .pane{
+    background:#fff; flex:1 1 auto; overflow:auto;
+    margin:1px; padding:10px 12px; min-height:0; line-height:1.5;
+    box-shadow:
+      inset  1px  1px 0 0 var(--shadow2),
+      inset -1px -1px 0 0 var(--hi),
+      inset  2px  2px 0 0 var(--shadow),
+      inset -2px -2px 0 0 var(--hi2);
+  }
+  .pane h1{ font-size:22px; line-height:1.1; margin:0 0 6px; font-weight:bold; }
+  .pane h2{ font-size:11px; text-transform:uppercase; letter-spacing:.6px; margin:22px 0 9px; border-bottom:1px solid #808080; padding-bottom:3px; font-weight:bold; }
+  .pane p{ margin:0 0 9px; }
+  .pane a{ color:var(--link); text-decoration:underline; }
+  .pane a:visited{ color:#551a8b; }
+  .pane code{ font-family:"Courier New",monospace; font-size:11px; background:#eee; padding:0 2px; }
+  .pane pre{
+    font-family:"Courier New",monospace; font-size:11px; line-height:1.45;
+    background:#000; color:#46d35a; padding:9px 11px; margin:8px 0 13px;
+    overflow-x:auto; white-space:pre;
+    box-shadow: inset 1px 1px 0 #000, inset -1px -1px 0 #4a4a4a, inset 2px 2px 0 #2a2a2a;
+  }
+  .pane pre code{ background:none; padding:0; color:inherit; font-size:inherit; }
+  .pane table{ border-collapse:collapse; margin:6px 0 12px; width:100%; font-size:11px; }
+  .pane th,.pane td{ border:1px solid #808080; padding:3px 6px; text-align:left; vertical-align:top; }
+  .pane th{ background:var(--face); }
+  .pane strong{ font-weight:bold; }
+  .tag{
+    display:inline-block; margin:2px 3px 2px 0; padding:1px 6px;
+    font-size:11px; background:var(--face);
+    box-shadow: inset -1px -1px 0 0 var(--shadow), inset 1px 1px 0 0 var(--hi);
+  }
+  .statusbar{ flex:0 0 auto; display:flex; margin-top:3px; gap:3px; }
+  .statusbar .seg{
+    padding:2px 6px; flex:0 0 auto;
+    box-shadow:
+      inset  1px  1px 0 0 var(--shadow),
+      inset -1px -1px 0 0 var(--hi);
+  }
+  .statusbar .seg.grow{ flex:1 1 auto; }
+  .statusbar a{ color:#000; }
+  @media (max-width:760px){
+    body{ padding:0; }
+    .window{ height:100vh; max-width:none; }
+    .title-bar{ height:30px; padding:0 3px 0 5px; }
+    .title-bar-text{ font-size:13px; }
+    .tb-btn{ width:24px; height:22px; font-size:12px; }
+  }
 </style>
 </head>
 <body>
-  <div class="c"><div>Opening the article&hellip; <a href="/#mcp-inspector">esinecan.com</a></div></div>
-  <script>location.replace('/#mcp-inspector');</script>
+<div class="window">
+  <div class="title-bar">
+    <div class="title-bar-text">
+      <svg viewBox="0 0 32 32"><path d="M8 3 H22 L26 7 V29 H8 Z" fill="#fff" stroke="#000"/></svg>
+      An MCP tool to let AI debug any MCP server on the fly - WordPad
+    </div>
+    <div class="title-bar-controls">
+      <a class="tb-btn" href="/#mcp-inspector" title="Open in the desktop">&#10064;</a>
+      <a class="tb-btn" href="/" title="Back to esinecan.com">&#10005;</a>
+    </div>
+  </div>
+  <div class="menustrip"><span>File</span><span>Edit</span><span>View</span><span>Help</span></div>
+  <div class="pane" id="article">
+    <noscript><p>This page renders its content with JavaScript. The article also lives at
+      <a href="https://esinecan.com/#mcp-inspector">esinecan.com/#mcp-inspector</a>.</p></noscript>
+  </div>
+  <div class="statusbar">
+    <div class="seg grow"><a href="/#mcp-inspector">Open this article in the Sinecan&nbsp;95 desktop</a></div>
+    <div class="seg"><a href="/">esinecan.com</a></div>
+  </div>
+</div>
+<script src="articles.js"></script>
+<script>
+  document.getElementById('article').insertAdjacentHTML('afterbegin', window.SITE_ARTICLES['mcp-inspector'].html);
+</script>
 </body>
 </html>
