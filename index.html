@@ -827,6 +827,18 @@ function openFromHash(){
 }
 window.addEventListener('hashchange',openFromHash);
 
+/* reverse direction: focusing a window writes its slug into the URL so the
+   view is shareable. about is the homepage, so it maps to the bare URL. */
+const WIN_TO_HASH = {about:'', blog:'blog', projects:'projects', resume:'resume',
+  somatic:'somatic-rag', mcpinsp:'mcp-inspector'};
+function reflectUrl(id){
+  const slug = WIN_TO_HASH[id];
+  if(slug===undefined) return;
+  history.replaceState(null,'', slug ? '#'+slug : location.pathname+location.search);
+}
+/* captured before any window opens, because focusing about clears the hash */
+const INITIAL_WIN = HASH_TO_WIN[(location.hash||'').replace(/^#/,'').toLowerCase()];
+
 function makeMenu(){
   return `<div class="menustrip">${['File','Edit','View','Help'].map(m=>'<span>'+m+'</span>').join('')}</div>`;
 }
@@ -899,6 +911,7 @@ function focusWin(id){
   o.el.classList.add('focused-top');
   o.el.style.zIndex=++zTop;
   o.taskBtn.classList.add('active');
+  reflectUrl(id);
 }
 function closeWin(id){
   const o=open[id]; if(!o) return;
@@ -907,6 +920,13 @@ function closeWin(id){
   tb.remove();
   el.classList.add('closing');
   setTimeout(()=>el.remove(),100);
+  let topId=null, topZ=-1;
+  Object.entries(open).forEach(([wid,w])=>{
+    const z=+w.el.style.zIndex||0;
+    if(!w.minimized && z>topZ){ topZ=z; topId=wid; }
+  });
+  if(topId) focusWin(topId);
+  else history.replaceState(null,'',location.pathname+location.search);
 }
 function openLink(url){
   document.body.classList.add('busy');
@@ -1055,13 +1075,13 @@ bindDeskInteractions();
     boot.dataset.done='1';
     boot.classList.add('fade');
     setTimeout(()=>boot.remove(),520);
-    setTimeout(()=>{ openWindow('about'); openFromHash(); },0);
+    setTimeout(()=>{ openWindow('about'); if(INITIAL_WIN) openWindow(INITIAL_WIN); },0);
   }
 
   // returning within the same tab session skips the show
   if(sessionStorage.getItem('booted')){
     boot.remove();
-    setTimeout(()=>{ openWindow('about'); openFromHash(); },0);
+    setTimeout(()=>{ openWindow('about'); if(INITIAL_WIN) openWindow(INITIAL_WIN); },0);
     bindSkip(true);
     return;
   }
