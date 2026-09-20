@@ -1,0 +1,43 @@
+# Eren Can Sinecan
+
+> Backend, DevOps and AI agent infrastructure engineer in Berlin. Builds the
+> scaffolding agents work inside: harnesses, knowledge graphs, MCP servers, and
+> the hooks that push context to a model before it knows it needs it. Currently
+> works on pricing engine and engineering-workflow infrastructure at Forto.
+
+The site renders as a Windows 95 desktop for people with JavaScript. Every page
+also carries its full text in the HTML source, so no script is needed to read
+it. Fetch the URLs below directly.
+
+## Pages
+
+- [Home](https://esinecan.com/): About, writing index, projects and the full
+  resume. The content sits in the `#doc` element of the HTML source.
+- [You Can't Retrieve What You Don't Know You're Missing](https://esinecan.com/somatic-rag.html):
+  May 2026. Argues that retrieval-based agent memory only covers gaps the agent
+  already knows it has. Names the push half somatic RAG, implements it with
+  harness hooks, and compares the hook contracts of Claude Code, Codex CLI,
+  Gemini CLI, Cursor, pi and CodeWhale.
+- [An MCP tool to let AI debug any MCP server on the fly](https://esinecan.com/mcp-inspector.html):
+  April 2026. Describes mcp-inspector-as-mcp-server, an MCP server that connects
+  to other MCP servers so an assistant can test and debug them inside the same
+  conversation. 400 lines of TypeScript, one dependency, all three transports.
+
+## Code
+
+- [mcp-inspector-as-mcp-server](https://github.com/esinecan/mcp-inspector-as-mcp-server):
+  Meta-tool for MCP development. Persistent sessions, event ring buffer,
+  human-in-the-loop steering.
+- [agentic-ai-browser](https://github.com/esinecan/agentic-ai-browser):
+  Autonomous browser agent with DOM snapshot pruning. Won Most Innovative
+  Project at the 2025 Agentic AI Innovation Challenge.
+- [skynet-agent](https://github.com/esinecan/skynet-agent): Autonomous agent
+  with dual-layer memory, a Neo4j knowledge graph and a motivator agent that
+  tasks the model with self-maintenance when idle.
+- [somatic-memory](https://github.com/esinecan/somatic-memory): The small
+  library from the somatic RAG article.
+
+## Elsewhere
+
+- [GitHub](https://github.com/esinecan)
+- [LinkedIn](https://www.linkedin.com/in/esinecan)

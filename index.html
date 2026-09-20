@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>document.documentElement.className="js";</script>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23008080'/%3E%3Crect x='2' y='2' width='12' height='9' fill='%23c0c0c0'/%3E%3Crect x='3' y='3' width='10' height='2' fill='%23000080'/%3E%3Crect x='3' y='6' width='10' height='4' fill='%23ffffff'/%3E%3Crect x='5' y='12' width='6' height='2' fill='%23c0c0c0'/%3E%3C/svg%3E">
 <title>Eren Can Sinecan</title>
 <meta name="description" content="Most problems are devex problems. The developer isn't always human. Agent harnesses, knowledge graphs, MCP servers.">
@@ -10,6 +11,43 @@
 <meta property="og:description" content="Most problems are devex problems. The developer isn't always human.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://esinecan.com">
+<link rel="canonical" href="https://esinecan.com/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Eren Can Sinecan",
+  "url": "https://esinecan.com",
+  "jobTitle": "Backend, DevOps, AI Agent Infrastructure Engineer",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "Forto"
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Berlin",
+    "addressCountry": "DE"
+  },
+  "description": "Most problems are devex problems. The developer isn't always human. Agent harnesses, knowledge graphs, MCP servers.",
+  "knowsAbout": [
+    "AI agent infrastructure",
+    "Model Context Protocol",
+    "Retrieval augmented generation",
+    "TypeScript",
+    "Java",
+    "Kubernetes",
+    "Knowledge graphs"
+  ],
+  "sameAs": [
+    "https://github.com/esinecan",
+    "https://www.linkedin.com/in/esinecan"
+  ],
+  "alumniOf": {
+    "@type": "CollegeOrUniversity",
+    "name": "Koc University"
+  }
+}
+</script>
 <style>
   /* real pixel-bitmap MS Sans Serif (the actual Win9x system font), Tahoma falls back */
   @font-face{
@@ -194,7 +232,7 @@
     user-select:text;
     line-height:1.5;
   }
-  .pane.gray{ background:var(--face); user-select:none; }
+  .pane.gray{ background:var(--face); user-select:text; }
 
   /* menu strip under title bar (WordPad-ish) */
   .menustrip{
@@ -431,6 +469,12 @@
     padding:5px 6px;
     cursor:default;
   }
+  button.sm-item, a.sm-item{
+    width:100%; font-family:inherit; font-size:inherit;
+    background:transparent; border:0; color:inherit;
+    text-align:left; text-decoration:none;
+  }
+  a.desk-icon{ color:#fff; text-decoration:none; display:block; }
   .sm-item .ic{ width:24px; height:24px; flex:0 0 24px; }
   .sm-item:hover{ background:var(--title); color:#fff; }
   .sm-sep{ height:0; border-top:1px solid var(--shadow); border-bottom:1px solid var(--hi); margin:3px 1px; }
@@ -562,12 +606,222 @@
     #boot .splash{ width:88vw; height:200px; }
     #boot .logo{ font-size:34px; }
   }
+
+  /* ============ Progressive enhancement layer ============
+     #doc holds the real content as a plain document. Without JavaScript it
+     is the whole site. With JavaScript the desktop takes over: #doc is
+     clipped and made inert, and script moves its sections into windows. */
+
+  /* no JavaScript: show the document, hide every piece of desktop chrome */
+  html:not(.js) body{
+    height:auto; overflow:auto; user-select:text; display:block;
+    cursor:auto;
+  }
+  html:not(.js) #boot,
+  html:not(.js) #desktop,
+  html:not(.js) #taskbar,
+  html:not(.js) #start-menu,
+  html:not(.js) #ctx-menu{ display:none !important; }
+
+  /* JavaScript: the desktop is the interface, so clip the document out of
+     sight. clip-path keeps the text in the page for crawlers; the inert
+     attribute set by script keeps it out of the accessibility tree and out
+     of the tab order, so nothing is announced twice. */
+  html.js #doc{
+    position:absolute; width:1px; height:1px;
+    margin:-1px; padding:0; border:0;
+    overflow:hidden; clip-path:inset(50%); white-space:nowrap;
+  }
+
+  html.js .skip-link{ display:none; }
+  .skip-link{
+    position:absolute; left:-9999px; top:0;
+    z-index:1000001;
+    background:var(--face); color:#000;
+    padding:6px 12px; font-size:11px; text-decoration:none;
+    box-shadow:
+      inset -1px -1px 0 0 var(--shadow2), inset 1px 1px 0 0 var(--hi),
+      inset -2px -2px 0 0 var(--shadow), inset 2px 2px 0 0 var(--hi2);
+  }
+  .skip-link:focus{ left:6px; top:6px; }
+
+  /* the document, dressed as one maximised WordPad window */
+  #doc .docwin{
+    max-width:760px; margin:14px auto;
+    background:var(--face); padding:3px;
+    box-shadow:
+      inset -1px -1px 0 0 var(--shadow2), inset 1px 1px 0 0 var(--hi),
+      inset -2px -2px 0 0 var(--shadow), inset 2px 2px 0 0 var(--hi2);
+  }
+  #doc .doctitle{
+    height:20px;
+    background:linear-gradient(90deg,var(--title),var(--title2));
+    color:#fff; font-weight:bold; font-size:11px;
+    display:flex; align-items:center; gap:4px; padding:0 3px;
+  }
+  #doc .doctitle svg{ width:16px; height:16px; flex:0 0 16px; }
+  #doc .pane{
+    overflow:visible; padding:14px 16px;
+    box-shadow:
+      inset  1px  1px 0 0 var(--shadow2), inset -1px -1px 0 0 var(--hi),
+      inset  2px  2px 0 0 var(--shadow), inset -2px -2px 0 0 var(--hi2);
+  }
+  #doc .doc-role{ color:#000080; font-weight:bold; margin:0 0 14px; }
+  #doc .doc-actions{ margin-top:12px; }
+  #doc .filelist{ padding:0; }
+
+  /* shared by #doc and the windows it feeds */
+  .pane h2.group-title,
+  .pane h3.group-title{
+    font-size:11px; font-weight:bold;
+    margin:0; padding:0 4px;
+    border:0; text-transform:none; letter-spacing:0;
+  }
+  .pane a.btn{
+    color:#000; text-decoration:none;
+    display:inline-block; text-align:center;
+  }
+  .pane a.file-row{ color:inherit; text-decoration:none; }
+  .pane a.file-row:visited{ color:inherit; }
+  .pane .meta{ display:flex; flex-direction:column; }
+  .pane h3.doc-sub{
+    font-size:11px; text-transform:uppercase; letter-spacing:.6px;
+    margin:22px 0 9px; border-bottom:1px solid #808080;
+    padding-bottom:3px; font-weight:bold;
+  }
+  .cv-entry{ display:flex; gap:12px; margin-bottom:14px; }
+  .cv-date{ flex:0 0 78px; color:#000080; font-weight:bold; }
+  .cv-body{ flex:1 1 auto; }
+  .cv-body h4{ font-size:11px; margin:0; font-weight:bold; }
+  .cv-org{ color:#444; margin-bottom:4px; }
+  .cv-body p{ margin:0 0 5px; }
+
+  /* keyboard focus has to be visible on the Win95 chrome too */
+  .desk-icon:focus-visible{ border:1px dotted #fff; outline:1px solid #fff; }
+  .desk-icon:focus-visible span{ background:var(--title); text-shadow:none; }
+  .file-row:focus-visible{ outline:2px solid var(--title); outline-offset:-2px; }
+  .tb-btn:focus-visible,
+  .btn:focus-visible,
+  .task-btn:focus-visible,
+  #start-btn:focus-visible,
+  .sm-item:focus-visible{ outline:2px solid #000; outline-offset:-3px; }
+  .pane:focus{ outline:none; }
+
+  @media (max-width:760px){
+    #doc .docwin{ margin:0; max-width:none; }
+    #doc .pane{ font-size:14px; line-height:1.6; }
+    .cv-entry{ flex-direction:column; gap:2px; }
+    .cv-date{ flex-basis:auto; }
+  }
 </style>
 </head>
 <body>
 
+<a class="skip-link" href="#doc-main">Skip to content</a>
+
+<!-- ================= STATIC DOCUMENT =================
+     The real content, in the HTML source. Crawlers, agents and readers
+     without JavaScript get this. The Sinecan 95 desktop below is an
+     enhancement layer: once it boots, script clips this document and marks
+     it inert, then moves these same nodes into the desktop windows. Every
+     sentence on this site exists exactly once, and it is here. -->
+<div id="doc">
+  <div class="docwin">
+    <div class="doctitle">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M8 3 H22 L26 7 V29 H8 Z" fill="#fff" stroke="#000"/></svg>
+      <span>esinecan.com - Eren Can Sinecan</span>
+    </div>
+    <main class="pane" id="doc-main" tabindex="-1">
+      <header>
+        <h1>Eren Can Sinecan</h1>
+        <p class="doc-role">Backend, DevOps, AI Agent Infrastructure Engineer</p>
+      </header>
+
+      <section id="src-about">
+        <h2>About</h2>
+        <div class="group">
+          <h3 class="group-title">README.txt</h3>
+          <p style="margin:0">Most problems are devex problems.<br>The developer isn't always human.</p>
+        </div>
+        <p>I build the scaffolding agents work inside: harnesses, knowledge graphs, MCP servers, and the hooks that push the right context in before a model knows it needs it. Currently building pricing engine and engineering-workflow infrastructure at Forto in Berlin.</p>
+        <p class="doc-actions"><a class="btn" href="#blog">Read the Blog</a> <a class="btn" href="#projects">Projects</a> <a class="btn" href="#resume">Resume</a></p>
+      </section>
+
+      <section id="src-blog">
+        <h2>Writing</h2>
+        <div class="filelist">
+          <a class="file-row" href="/somatic-rag.html" data-article="somatic" data-dbl>
+            <svg class="ic" viewBox="0 0 32 32" aria-hidden="true"><path d="M8 3 H22 L26 7 V29 H8 Z" fill="#fff" stroke="#000"/><line x1="11" y1="12" x2="23" y2="12" stroke="#000080"/><line x1="11" y1="16" x2="23" y2="16" stroke="#777"/><line x1="11" y1="20" x2="23" y2="20" stroke="#777"/></svg>
+            <span class="meta"><span class="fn">You Can't Retrieve What You Don't Know You're Missing</span><span class="fd">May 2026 &middot; Somatic RAG</span></span>
+          </a>
+          <a class="file-row" href="/mcp-inspector.html" data-article="mcpinsp" data-dbl>
+            <svg class="ic" viewBox="0 0 32 32" aria-hidden="true"><path d="M8 3 H22 L26 7 V29 H8 Z" fill="#fff" stroke="#000"/><line x1="11" y1="12" x2="23" y2="12" stroke="#000080"/><line x1="11" y1="16" x2="23" y2="16" stroke="#777"/></svg>
+            <span class="meta"><span class="fn">An MCP tool to let AI debug any MCP server on the fly</span><span class="fd">April 2026 &middot; TypeScript, Meta-Tooling</span></span>
+          </a>
+          <a class="file-row" href="https://www.linkedin.com/pulse/llm-intern-fallacy-eren-can-sinecan-5gh5e/" data-link="https://www.linkedin.com/pulse/llm-intern-fallacy-eren-can-sinecan-5gh5e/" data-dbl>
+            <svg class="ic" viewBox="0 0 32 32" aria-hidden="true"><path d="M8 3 H22 L26 7 V29 H8 Z" fill="#fff" stroke="#000"/><line x1="11" y1="12" x2="23" y2="12" stroke="#000080"/></svg>
+            <span class="meta"><span class="fn">The LLM as Intern Fallacy</span><span class="fd">Jul 2025 &middot; AI, Architecture</span></span>
+          </a>
+        </div>
+      </section>
+
+      <section id="src-projects">
+        <h2>Projects</h2>
+        <div class="group">
+          <h3 class="group-title">mcp-inspector-as-mcp-server</h3>
+          <p style="color:#000080;margin:0 0 6px"><strong>Meta-tool for MCP development</strong></p>
+          <p>An MCP server that connects to other MCP servers, enabling AI assistants to test, debug, and iterate on tool implementations from inside the conversation. Persistent sessions, event ring buffer, and human-in-the-loop steering. 400 lines, one dependency.</p>
+          <p><a href="https://github.com/esinecan/mcp-inspector-as-mcp-server">GitHub</a> &nbsp;&middot;&nbsp; <a href="/mcp-inspector.html">Article</a></p>
+        </div>
+        <div class="group">
+          <h3 class="group-title">agentic-ai-browser</h3>
+          <p style="color:#000080;margin:0 0 6px"><strong>Autonomous browser agent</strong></p>
+          <p>LLM-powered web automation with DOM snapshot pruning for context management. Single-agent architecture. Won "Most Innovative Project" at the 2025 Agentic AI Innovation Challenge. 162 stars.</p>
+          <p><a href="https://github.com/esinecan/agentic-ai-browser">GitHub</a></p>
+        </div>
+        <div class="group">
+          <h3 class="group-title">skynet-agent</h3>
+          <p style="color:#000080;margin:0 0 6px"><strong>Digital proto-individual</strong></p>
+          <p>Autonomous AI agent with dual-layer memory (passive RAG + conscious volitional), Neo4j knowledge graph, and a secondary "motivator" agent that tasks the model with self-maintenance when idle. 128 stars.</p>
+          <p><a href="https://github.com/esinecan/skynet-agent">GitHub</a></p>
+        </div>
+      </section>
+
+      <section id="src-resume">
+        <h2>Resume</h2>
+        <div class="group">
+          <h3 class="group-title">Award</h3>
+          <p style="margin:0;font-weight:bold">Most Innovative AI Project</p>
+          <p style="color:#444;margin:2px 0 5px">Ready Tensor, Agentic AI Innovation Challenge -- April 2025</p>
+          <p style="margin:0">Adaptive Autonomous AI Co-Browser. Recognized for innovation in autonomous web agents, local-first architecture, and human-in-the-loop agentic workflows. Selected among global submissions.</p>
+        </div>
+        <h3 class="doc-sub">Experience</h3>
+        <div class="cv-entry"><div class="cv-date">2025 -- Present</div><div class="cv-body"><h4>Senior Engineer</h4><div class="cv-org">Forto -- Berlin</div><p>Pricing engine infrastructure for freight logistics. Weight bracket matching, partial quote integration, depot rate selection, local charges and customs. 80+ PRs across rates-management, pricing engine, and TMS. Created Faro MCP (312 tools from 16 service APIs) and Cortex-EM/PM for engineering workflow automation. 100+ code reviews.</p><p class="cv-tags"><span class="tag">TypeScript</span><span class="tag">NestJS</span><span class="tag">MongoDB</span><span class="tag">AWS</span><span class="tag">Kubernetes</span><span class="tag">MCP</span></p></div></div>
+        <div class="cv-entry"><div class="cv-date">2025</div><div class="cv-body"><h4>AI &amp; Backend Engineer</h4><div class="cv-org">Freelance -- Berlin</div><p>Contract work bridging backend infrastructure and AI agent systems. Built agentic-ai-browser (162 stars, award-winning) and began skynet-agent. RAG pipelines, LangChain orchestration, AWS infrastructure.</p><p class="cv-tags"><span class="tag">Java</span><span class="tag">Spring Boot</span><span class="tag">LangChain</span><span class="tag">RAG</span><span class="tag">AWS</span><span class="tag">React</span></p></div></div>
+        <div class="cv-entry"><div class="cv-date">2019 -- 2025</div><div class="cv-body"><h4>Senior Backend Developer</h4><div class="cv-org">CompuGroup Medical -- Berlin</div><p>Led monolith-to-microservices decomposition across Spring Boot and Kafka. Migrated messaging from ActiveMQ to Kafka. Established CI/CD pipelines with Jenkins and Kubernetes, cutting deployment cycles by 40%. Built ELK dashboards for incident detection.</p><p class="cv-tags"><span class="tag">Java</span><span class="tag">Spring Boot</span><span class="tag">Kafka</span><span class="tag">Kubernetes</span><span class="tag">AWS</span><span class="tag">ELK</span></p></div></div>
+        <div class="cv-entry"><div class="cv-date">2017 -- 2019</div><div class="cv-body"><h4>Backend Developer</h4><div class="cv-org">Giata GmbH -- Berlin</div><p>Transformed PHP monolith into Node.js microservices, cutting page load times from 2s to under 1s. Automated AWS CloudFormation processes. RabbitMQ for service communication.</p><p class="cv-tags"><span class="tag">Node.js</span><span class="tag">TypeScript</span><span class="tag">AWS</span><span class="tag">RabbitMQ</span></p></div></div>
+        <div class="cv-entry"><div class="cv-date">2016 -- 2017</div><div class="cv-body"><h4>Java Microservices Engineer</h4><div class="cv-org">AUTO1 Group -- Berlin</div><p>Spring Cloud microservice architecture. Implemented ELK-based monitoring, reducing root-cause analysis time from days to hours.</p><p class="cv-tags"><span class="tag">Java</span><span class="tag">Spring Cloud</span><span class="tag">ELK</span><span class="tag">AWS</span></p></div></div>
+        <div class="cv-entry"><div class="cv-date">2015 -- 2016</div><div class="cv-body"><h4>Head of Engineering</h4><div class="cv-org">Molto DS -- Istanbul</div><p>Led engineering for first product using MEAN Stack, Docker, and Azure. Implemented testing frameworks with Jasmine and Karma.</p><p class="cv-tags"><span class="tag">Node.js</span><span class="tag">MongoDB</span><span class="tag">Docker</span><span class="tag">Azure</span></p></div></div>
+        <div class="cv-entry"><div class="cv-date">2013 -- 2015</div><div class="cv-body"><h4>Senior Software Engineer</h4><div class="cv-org">Garanti Teknoloji -- Istanbul</div><p>Web applications for pension customers and insurance sales using AngularJS and Spring MVC. Reporting systems. Internal knowledge sharing portal.</p><p class="cv-tags"><span class="tag">Java</span><span class="tag">Spring MVC</span><span class="tag">AngularJS</span></p></div></div>
+        <div class="cv-entry"><div class="cv-date">2011 -- 2013</div><div class="cv-body"><h4>Software Development Specialist</h4><div class="cv-org">Bilge Adam / Veripark -- Istanbul</div><p>Enterprise portals for Borusan Automotive and Borusan Holding. Internet banking application with J2EE, JSF, and Oracle.</p><p class="cv-tags"><span class="tag">Java</span><span class="tag">J2EE</span><span class="tag">Oracle</span></p></div></div>
+        <h3 class="doc-sub">Education</h3>
+        <p style="margin:0 0 6px"><strong>Koc University</strong><br>BS Computer Engineering (Full Merit Scholarship) -- 2005-2011</p>
+        <p style="margin:0 0 6px"><strong>Izmir High School of Science</strong><br>2002-2005</p>
+        <h3 class="doc-sub">Languages</h3>
+        <p style="margin:0"><strong>Turkish</strong> Native &nbsp;&middot;&nbsp; <strong>English</strong> Full professional &nbsp;&middot;&nbsp; <strong>German</strong> Conversational</p>
+      </section>
+
+      <nav id="src-links" aria-label="Elsewhere">
+        <h2>Elsewhere</h2>
+        <p><a href="https://github.com/esinecan">GitHub: github.com/esinecan</a><br>
+           <a href="https://www.linkedin.com/in/esinecan">LinkedIn: linkedin.com/in/esinecan</a></p>
+      </nav>
+    </main>
+  </div>
+</div>
+
 <!-- ================= BOOT ================= -->
-<div id="boot">
+<div id="boot" aria-hidden="true">
   <div class="post" id="post"></div>
   <div class="splash" id="splash">
     <div class="logo">Sinecan<small>95</small></div>
@@ -578,19 +832,19 @@
 </div>
 
 <!-- ================= CONTEXT MENU ================= -->
-<div id="ctx-menu">
-  <div class="ci dis">Arrange Icons</div>
-  <div class="ci" data-ctx="lineup">Line up Icons</div>
-  <div class="csep"></div>
-  <div class="ci" data-ctx="refresh">Refresh</div>
-  <div class="csep"></div>
-  <div class="ci" data-ctx="props">Properties</div>
+<div id="ctx-menu" role="menu" aria-label="Desktop">
+  <div class="ci dis" role="menuitem" aria-disabled="true">Arrange Icons</div>
+  <div class="ci" role="menuitem" data-ctx="lineup">Line up Icons</div>
+  <div class="csep" role="separator"></div>
+  <div class="ci" role="menuitem" data-ctx="refresh">Refresh</div>
+  <div class="csep" role="separator"></div>
+  <div class="ci" role="menuitem" data-ctx="props">Properties</div>
 </div>
 
 <div id="desktop">
-  <div class="desk-icons" id="desk-icons">
-    <div class="desk-icon" data-open="about" data-dbl>
-      <svg class="ic" viewBox="0 0 32 32" shape-rendering="crispEdges">
+  <nav class="desk-icons" id="desk-icons" aria-label="Desktop shortcuts">
+    <a class="desk-icon" href="#about" data-open="about" data-dbl>
+      <svg aria-hidden="true" class="ic" viewBox="0 0 32 32" shape-rendering="crispEdges">
         <rect x="3" y="4" width="26" height="20" fill="#fff" stroke="#000"/>
         <rect x="5" y="6" width="22" height="14" fill="#008080"/>
         <rect x="11" y="25" width="10" height="3" fill="#c0c0c0" stroke="#000"/>
@@ -599,26 +853,26 @@
         <rect x="11" y="16" width="10" height="4" fill="#ffd9a8"/>
       </svg>
       <span>About Me</span>
-    </div>
-    <div class="desk-icon" data-open="blog" data-dbl>
-      <svg class="ic" viewBox="0 0 32 32" shape-rendering="crispEdges">
+    </a>
+    <a class="desk-icon" href="#blog" data-open="blog" data-dbl>
+      <svg aria-hidden="true" class="ic" viewBox="0 0 32 32" shape-rendering="crispEdges">
         <path d="M3 9 H13 L16 12 H29 V26 H3 Z" fill="#ffd84d" stroke="#000"/>
         <path d="M3 9 H13 L16 12 H29" fill="none" stroke="#000"/>
         <rect x="3" y="12" width="26" height="14" fill="#ffe680" stroke="#000"/>
       </svg>
       <span>Blog</span>
-    </div>
-    <div class="desk-icon" data-open="projects" data-dbl>
-      <svg class="ic" viewBox="0 0 32 32" shape-rendering="crispEdges">
+    </a>
+    <a class="desk-icon" href="#projects" data-open="projects" data-dbl>
+      <svg aria-hidden="true" class="ic" viewBox="0 0 32 32" shape-rendering="crispEdges">
         <path d="M3 9 H13 L16 12 H29 V26 H3 Z" fill="#ffd84d" stroke="#000"/>
         <rect x="3" y="12" width="26" height="14" fill="#ffe680" stroke="#000"/>
         <rect x="10" y="15" width="12" height="8" fill="#fff" stroke="#000"/>
         <path d="M12 19 l2 2 4-4" fill="none" stroke="#008000" stroke-width="2"/>
       </svg>
       <span>Projects</span>
-    </div>
-    <div class="desk-icon" data-open="resume" data-dbl>
-      <svg class="ic" viewBox="0 0 32 32" shape-rendering="crispEdges">
+    </a>
+    <a class="desk-icon" href="#resume" data-open="resume" data-dbl>
+      <svg aria-hidden="true" class="ic" viewBox="0 0 32 32" shape-rendering="crispEdges">
         <path d="M8 3 H22 L26 7 V29 H8 Z" fill="#fff" stroke="#000"/>
         <path d="M22 3 V7 H26" fill="#dfdfdf" stroke="#000"/>
         <line x1="11" y1="12" x2="23" y2="12" stroke="#000080"/>
@@ -627,31 +881,31 @@
         <line x1="11" y1="24" x2="19" y2="24" stroke="#777"/>
       </svg>
       <span>Resume.doc</span>
-    </div>
-    <div class="desk-icon" data-link="https://github.com/esinecan" data-dbl>
-      <svg class="ic" viewBox="0 0 32 32">
+    </a>
+    <a class="desk-icon" href="https://github.com/esinecan" data-link="https://github.com/esinecan" data-dbl>
+      <svg aria-hidden="true" class="ic" viewBox="0 0 32 32">
         <rect x="3" y="4" width="26" height="24" rx="2" fill="#fff" stroke="#000"/>
         <path fill="#181717" d="M16 7a9 9 0 0 0-2.84 17.54c.45.08.61-.2.61-.43v-1.5c-2.5.54-3.03-1.2-3.03-1.2-.41-1.04-1-1.32-1-1.32-.82-.56.06-.55.06-.55.9.07 1.38.94 1.38.94.8 1.38 2.1.98 2.62.75.08-.58.31-.98.57-1.2-2-.23-4.1-1-4.1-4.45 0-.98.35-1.79.93-2.42-.1-.23-.4-1.15.08-2.4 0 0 .76-.24 2.48.92a8.6 8.6 0 0 1 4.51 0c1.72-1.16 2.48-.92 2.48-.92.49 1.25.18 2.17.09 2.4.58.63.93 1.44.93 2.42 0 3.46-2.11 4.22-4.12 4.44.32.28.61.83.61 1.68v2.49c0 .24.16.52.62.43A9 9 0 0 0 16 7z"/>
       </svg>
       <span>GitHub</span>
-    </div>
-    <div class="desk-icon" data-link="https://www.linkedin.com/in/esinecan" data-dbl>
-      <svg class="ic" viewBox="0 0 32 32">
+    </a>
+    <a class="desk-icon" href="https://www.linkedin.com/in/esinecan" data-link="https://www.linkedin.com/in/esinecan" data-dbl>
+      <svg aria-hidden="true" class="ic" viewBox="0 0 32 32">
         <rect x="3" y="4" width="26" height="24" rx="2" fill="#fff" stroke="#000"/>
         <rect x="7" y="9" width="18" height="14" rx="1" fill="#0a66c2"/>
         <text x="16" y="20" font-size="10" font-family="Tahoma" fill="#fff" text-anchor="middle" font-weight="bold">in</text>
       </svg>
       <span>LinkedIn</span>
-    </div>
-  </div>
+    </a>
+  </nav>
 
   <div class="hint">Double-click an icon. Drag the title bars.</div>
 </div>
 
 <!-- ================= TASKBAR ================= -->
-<div id="taskbar">
-  <button id="start-btn">
-    <svg width="18" height="16" viewBox="0 0 18 16" shape-rendering="crispEdges">
+<div id="taskbar" role="toolbar" aria-label="Taskbar">
+  <button id="start-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="start-menu">
+    <svg aria-hidden="true" width="18" height="16" viewBox="0 0 18 16" shape-rendering="crispEdges">
       <rect x="0" y="1" width="8" height="7" fill="#ff3b30"/>
       <rect x="9" y="0" width="8" height="7" fill="#34c759"/>
       <rect x="0" y="9" width="8" height="7" fill="#007aff"/>
@@ -659,156 +913,118 @@
     </svg>
     Start
   </button>
-  <div class="task-buttons" id="task-buttons"></div>
-  <div id="tray"><span id="clock">--:--</span></div>
+  <div class="task-buttons" id="task-buttons" aria-label="Open windows"></div>
+  <div id="tray" aria-hidden="true"><span id="clock">--:--</span></div>
 </div>
 
 <!-- ================= START MENU ================= -->
-<div id="start-menu">
-  <div class="sm-banner"><span><b>Sinecan</b>&nbsp;<i>95</i></span></div>
+<div id="start-menu" role="menu" aria-label="Start menu">
+  <div class="sm-banner" aria-hidden="true"><span><b>Sinecan</b>&nbsp;<i>95</i></span></div>
   <div class="sm-items">
-    <div class="sm-item" data-open="about">
-      <svg class="ic" viewBox="0 0 32 32"><circle cx="16" cy="11" r="6" fill="#ffd9a8" stroke="#000"/><path d="M5 30 q11-12 22 0" fill="#3b6ea5" stroke="#000"/></svg>
+    <button class="sm-item" type="button" role="menuitem" data-open="about">
+      <svg aria-hidden="true" class="ic" viewBox="0 0 32 32"><circle cx="16" cy="11" r="6" fill="#ffd9a8" stroke="#000"/><path d="M5 30 q11-12 22 0" fill="#3b6ea5" stroke="#000"/></svg>
       About Me
-    </div>
-    <div class="sm-item" data-open="blog">
-      <svg class="ic" viewBox="0 0 32 32"><path d="M3 9 H13 L16 12 H29 V26 H3 Z" fill="#ffd84d" stroke="#000"/></svg>
+    </button>
+    <button class="sm-item" type="button" role="menuitem" data-open="blog">
+      <svg aria-hidden="true" class="ic" viewBox="0 0 32 32"><path d="M3 9 H13 L16 12 H29 V26 H3 Z" fill="#ffd84d" stroke="#000"/></svg>
       Blog
-    </div>
-    <div class="sm-item" data-open="projects">
-      <svg class="ic" viewBox="0 0 32 32"><path d="M3 9 H13 L16 12 H29 V26 H3 Z" fill="#ffd84d" stroke="#000"/><rect x="10" y="15" width="12" height="8" fill="#fff" stroke="#000"/></svg>
+    </button>
+    <button class="sm-item" type="button" role="menuitem" data-open="projects">
+      <svg aria-hidden="true" class="ic" viewBox="0 0 32 32"><path d="M3 9 H13 L16 12 H29 V26 H3 Z" fill="#ffd84d" stroke="#000"/><rect x="10" y="15" width="12" height="8" fill="#fff" stroke="#000"/></svg>
       Projects
-    </div>
-    <div class="sm-item" data-open="resume">
-      <svg class="ic" viewBox="0 0 32 32"><path d="M8 3 H22 L26 7 V29 H8 Z" fill="#fff" stroke="#000"/><line x1="11" y1="12" x2="23" y2="12" stroke="#000080"/><line x1="11" y1="16" x2="23" y2="16" stroke="#777"/><line x1="11" y1="20" x2="23" y2="20" stroke="#777"/></svg>
+    </button>
+    <button class="sm-item" type="button" role="menuitem" data-open="resume">
+      <svg aria-hidden="true" class="ic" viewBox="0 0 32 32"><path d="M8 3 H22 L26 7 V29 H8 Z" fill="#fff" stroke="#000"/><line x1="11" y1="12" x2="23" y2="12" stroke="#000080"/><line x1="11" y1="16" x2="23" y2="16" stroke="#777"/><line x1="11" y1="20" x2="23" y2="20" stroke="#777"/></svg>
       Resume
-    </div>
-    <div class="sm-sep"></div>
-    <div class="sm-item" data-link="https://github.com/esinecan">
-      <svg class="ic" viewBox="0 0 32 32"><circle cx="16" cy="16" r="13" fill="#181717"/><circle cx="16" cy="16" r="13" fill="none" stroke="#000"/></svg>
+    </button>
+    <div class="sm-sep" role="separator"></div>
+    <a class="sm-item" role="menuitem" href="https://github.com/esinecan" data-link="https://github.com/esinecan">
+      <svg aria-hidden="true" class="ic" viewBox="0 0 32 32"><circle cx="16" cy="16" r="13" fill="#181717"/><circle cx="16" cy="16" r="13" fill="none" stroke="#000"/></svg>
       GitHub
-    </div>
-    <div class="sm-item" data-link="https://www.linkedin.com/in/esinecan">
-      <svg class="ic" viewBox="0 0 32 32"><rect x="4" y="4" width="24" height="24" rx="2" fill="#0a66c2"/><text x="16" y="22" font-size="13" font-family="Tahoma" fill="#fff" text-anchor="middle" font-weight="bold">in</text></svg>
+    </a>
+    <a class="sm-item" role="menuitem" href="https://www.linkedin.com/in/esinecan" data-link="https://www.linkedin.com/in/esinecan">
+      <svg aria-hidden="true" class="ic" viewBox="0 0 32 32"><rect x="4" y="4" width="24" height="24" rx="2" fill="#0a66c2"/><text x="16" y="22" font-size="13" font-family="Tahoma" fill="#fff" text-anchor="middle" font-weight="bold">in</text></svg>
       LinkedIn
-    </div>
+    </a>
   </div>
 </div>
 
 <!-- title-bar icons reused -->
-<svg style="display:none">
+<svg aria-hidden="true" style="display:none">
   <symbol id="i-person" viewBox="0 0 16 16"><circle cx="8" cy="5" r="3" fill="#ffd9a8" stroke="#000"/><path d="M2 15 q6-7 12 0" fill="#3b6ea5" stroke="#000"/></symbol>
 </svg>
 
-<script src="articles.js"></script>
 <script>
-/* ===================== content ===================== */
-const ARTICLE = window.SITE_ARTICLES['somatic-rag'].html;
+/* ===================== content =====================
+   There are no content strings here. Every sentence lives in the static
+   #doc document above, and the two articles live in their own pages. A
+   window takes its body from one of those two places:
 
-const ARTICLE_MCP = window.SITE_ARTICLES['mcp-inspector'].html;
+     src      an element id inside #doc; the node is moved into the window
+     fetchSrc an article page URL; #article is fetched and inserted once
 
-const BLOG_FILES = `
-<div class="filelist">
-  <div class="file-row" data-article="somatic" data-dbl>
-    <svg class="ic" viewBox="0 0 32 32"><path d="M8 3 H22 L26 7 V29 H8 Z" fill="#fff" stroke="#000"/><line x1="11" y1="12" x2="23" y2="12" stroke="#000080"/><line x1="11" y1="16" x2="23" y2="16" stroke="#777"/><line x1="11" y1="20" x2="23" y2="20" stroke="#777"/></svg>
-    <div class="meta"><span class="fn">You Can't Retrieve What You Don't Know You're Missing</span><span class="fd">May 2026 &middot; Somatic RAG &middot; double-click to open</span></div>
-  </div>
-  <div class="file-row" data-article="mcpinsp" data-dbl>
-    <svg class="ic" viewBox="0 0 32 32"><path d="M8 3 H22 L26 7 V29 H8 Z" fill="#fff" stroke="#000"/><line x1="11" y1="12" x2="23" y2="12" stroke="#000080"/><line x1="11" y1="16" x2="23" y2="16" stroke="#777"/></svg>
-    <div class="meta"><span class="fn">An MCP tool to let AI debug any MCP server on the fly</span><span class="fd">April 2026 &middot; TypeScript, Meta-Tooling</span></div>
-  </div>
-  <div class="file-row" data-link="https://www.linkedin.com/pulse/llm-intern-fallacy-eren-can-sinecan-5gh5e/" data-dbl>
-    <svg class="ic" viewBox="0 0 32 32"><path d="M8 3 H22 L26 7 V29 H8 Z" fill="#fff" stroke="#000"/><line x1="11" y1="12" x2="23" y2="12" stroke="#000080"/></svg>
-    <div class="meta"><span class="fn">The LLM as Intern Fallacy</span><span class="fd">Jul 2025 &middot; AI, Architecture</span></div>
-  </div>
-</div>
-`;
+   That keeps exactly one copy of each sentence, and puts that copy in the
+   HTML source where crawlers and agents can read it without running any
+   script. */
 
-const ABOUT = `
-<div style="text-align:center;margin-bottom:10px">
-  <svg width="56" height="56" viewBox="0 0 32 32"><circle cx="16" cy="11" r="6" fill="#ffd9a8" stroke="#000"/><path d="M3 30 q13-13 26 0" fill="#3b6ea5" stroke="#000"/></svg>
-  <h1 style="margin:6px 0 2px">Eren Can Sinecan</h1>
-  <p style="color:#000080;font-weight:bold;margin:0">Backend, DevOps, AI Agent Infrastructure Engineer</p>
-</div>
-<div class="group"><span class="group-title">README.txt</span>
-  <p style="margin:0">Most problems are devex problems.<br>The developer isn't always human.</p>
-</div>
-<p>I build the scaffolding agents work inside: harnesses, knowledge graphs, MCP servers, and the hooks that push the right context in before a model knows it needs it. Currently building pricing engine and engineering-workflow infrastructure at Forto in Berlin.</p>
-<div style="text-align:center;margin-top:14px">
-  <button class="btn" data-open="blog">Read the Blog</button>
-  <button class="btn" data-open="projects">Projects</button>
-  <button class="btn" data-open="resume">Resume</button>
-</div>
-`;
+const doc = document.getElementById('doc');
+if(doc) doc.inert = true;   // clipped by CSS; inert keeps it out of focus and a11y
 
-const PROJECTS = `
-<div class="group"><span class="group-title">mcp-inspector-as-mcp-server</span>
-  <p style="color:#000080;margin:0 0 6px"><strong>Meta-tool for MCP development</strong></p>
-  <p>An MCP server that connects to other MCP servers, enabling AI assistants to test, debug, and iterate on tool implementations from inside the conversation. Persistent sessions, event ring buffer, and human-in-the-loop steering. 400 lines, one dependency.</p>
-  <p><a href="https://github.com/esinecan/mcp-inspector-as-mcp-server">GitHub</a> &nbsp;&middot;&nbsp; <a href="#mcp-inspector">Article</a></p>
-</div>
-<div class="group"><span class="group-title">agentic-ai-browser</span>
-  <p style="color:#000080;margin:0 0 6px"><strong>Autonomous browser agent</strong></p>
-  <p>LLM-powered web automation with DOM snapshot pruning for context management. Single-agent architecture. Won "Most Innovative Project" at the 2025 Agentic AI Innovation Challenge. 162 stars.</p>
-  <p><a href="https://github.com/esinecan/agentic-ai-browser">GitHub</a></p>
-</div>
-<div class="group"><span class="group-title">skynet-agent</span>
-  <p style="color:#000080;margin:0 0 6px"><strong>Digital proto-individual</strong></p>
-  <p>Autonomous AI agent with dual-layer memory (passive RAG + conscious volitional), Neo4j knowledge graph, and a secondary "motivator" agent that tasks the model with self-maintenance when idle. 128 stars.</p>
-  <p><a href="https://github.com/esinecan/skynet-agent">GitHub</a></p>
-</div>
-`;
-
-function resumeEntry(date,role,company,body,tags){
-  return `<div style="display:flex;gap:12px;margin-bottom:14px">
-    <div style="flex:0 0 78px;color:#000080;font-weight:bold">${date}</div>
-    <div style="flex:1 1 auto">
-      <h3 style="margin:0">${role}</h3>
-      <div style="color:#444;margin-bottom:4px">${company}</div>
-      <p style="margin:0 0 5px">${body}</p>
-      <div>${tags.map(t=>'<span class="tag">'+t+'</span>').join('')}</div>
-    </div>
-  </div>`;
+/* move a #doc section into a window body, stripping ids so the document
+   never has two elements with the same id */
+function takeSource(srcId){
+  const node = document.getElementById(srcId);
+  if(!node) return null;
+  const clone = node.cloneNode(true);
+  clone.removeAttribute('id');
+  clone.querySelectorAll('[id]').forEach(n=>n.removeAttribute('id'));
+  return clone;
 }
-const RESUME = `
-<div class="group"><span class="group-title">Award</span>
-  <h3 style="margin:0">Most Innovative AI Project</h3>
-  <p style="color:#444;margin:2px 0 5px">Ready Tensor, Agentic AI Innovation Challenge -- April 2025</p>
-  <p style="margin:0">Adaptive Autonomous AI Co-Browser. Recognized for innovation in autonomous web agents, local-first architecture, and human-in-the-loop agentic workflows. Selected among global submissions.</p>
-</div>
-<h2>Experience</h2>
-${resumeEntry("2025 -- Present","Senior Engineer","Forto -- Berlin","Pricing engine infrastructure for freight logistics. Weight bracket matching, partial quote integration, depot rate selection, local charges and customs. 80+ PRs across rates-management, pricing engine, and TMS. Created Faro MCP (312 tools from 16 service APIs) and Cortex-EM/PM for engineering workflow automation. 100+ code reviews.",["TypeScript","NestJS","MongoDB","AWS","Kubernetes","MCP"])}
-${resumeEntry("2025","AI & Backend Engineer","Freelance -- Berlin","Contract work bridging backend infrastructure and AI agent systems. Built agentic-ai-browser (162 stars, award-winning) and began skynet-agent. RAG pipelines, LangChain orchestration, AWS infrastructure.",["Java","Spring Boot","LangChain","RAG","AWS","React"])}
-${resumeEntry("2019 -- 2025","Senior Backend Developer","CompuGroup Medical -- Berlin","Led monolith-to-microservices decomposition across Spring Boot and Kafka. Migrated messaging from ActiveMQ to Kafka. Established CI/CD pipelines with Jenkins and Kubernetes, cutting deployment cycles by 40%. Built ELK dashboards for incident detection.",["Java","Spring Boot","Kafka","Kubernetes","AWS","ELK"])}
-${resumeEntry("2017 -- 2019","Backend Developer","Giata GmbH -- Berlin","Transformed PHP monolith into Node.js microservices, cutting page load times from 2s to under 1s. Automated AWS CloudFormation processes. RabbitMQ for service communication.",["Node.js","TypeScript","AWS","RabbitMQ"])}
-${resumeEntry("2016 -- 2017","Java Microservices Engineer","AUTO1 Group -- Berlin","Spring Cloud microservice architecture. Implemented ELK-based monitoring, reducing root-cause analysis time from days to hours.",["Java","Spring Cloud","ELK","AWS"])}
-${resumeEntry("2015 -- 2016","Head of Engineering","Molto DS -- Istanbul","Led engineering for first product using MEAN Stack, Docker, and Azure. Implemented testing frameworks with Jasmine and Karma.",["Node.js","MongoDB","Docker","Azure"])}
-${resumeEntry("2013 -- 2015","Senior Software Engineer","Garanti Teknoloji -- Istanbul","Web applications for pension customers and insurance sales using AngularJS and Spring MVC. Reporting systems. Internal knowledge sharing portal.",["Java","Spring MVC","AngularJS"])}
-${resumeEntry("2011 -- 2013","Software Development Specialist","Bilge Adam / Veripark -- Istanbul","Enterprise portals for Borusan Automotive and Borusan Holding. Internet banking application with J2EE, JSF, and Oracle.",["Java","J2EE","Oracle"])}
-<h2>Education</h2>
-<p style="margin:0 0 6px"><strong>Koc University</strong><br>BS Computer Engineering (Full Merit Scholarship) -- 2005-2011</p>
-<p style="margin:0 0 6px"><strong>Izmir High School of Science</strong><br>2002-2005</p>
-<h2>Languages</h2>
-<p style="margin:0"><strong>Turkish</strong> Native &nbsp;&middot;&nbsp; <strong>English</strong> Full professional &nbsp;&middot;&nbsp; <strong>German</strong> Conversational</p>
-`;
+
+/* pull an article body out of its own page, once per session */
+const articleCache = {};
+async function fillFromPage(pane, url){
+  if(articleCache[url]){ pane.innerHTML = articleCache[url]; return; }
+  pane.innerHTML = '<p>Opening ' + url + ' ...</p>';
+  try{
+    const res = await fetch(url, {credentials:'same-origin'});
+    if(!res.ok) throw new Error('HTTP ' + res.status);
+    const parsed = new DOMParser().parseFromString(await res.text(), 'text/html');
+    const art = parsed.getElementById('article');
+    if(!art) throw new Error('no #article element in ' + url);
+    articleCache[url] = art.innerHTML;
+    pane.innerHTML = articleCache[url];
+  }catch(err){
+    pane.innerHTML = '<p>This article did not load in the desktop (' + err.message +
+      '). It is a plain page at <a href="' + url + '">' + url + '</a>.</p>';
+  }
+}
 
 /* ===================== window definitions ===================== */
-const FOLDER_ICON='<svg class="tic" viewBox="0 0 32 32"><path d="M3 9 H13 L16 12 H29 V26 H3 Z" fill="#ffd84d" stroke="#000"/></svg>';
-const DOC_ICON='<svg class="tic" viewBox="0 0 32 32"><path d="M8 3 H22 L26 7 V29 H8 Z" fill="#fff" stroke="#000"/></svg>';
-const PERSON_ICON='<svg class="tic" viewBox="0 0 16 16"><circle cx="8" cy="5" r="3" fill="#ffd9a8" stroke="#000"/><path d="M2 15 q6-7 12 0" fill="#3b6ea5" stroke="#000"/></svg>';
+const FOLDER_ICON='<svg class="tic" viewBox="0 0 32 32" aria-hidden="true"><path d="M3 9 H13 L16 12 H29 V26 H3 Z" fill="#ffd84d" stroke="#000"/></svg>';
+const DOC_ICON='<svg class="tic" viewBox="0 0 32 32" aria-hidden="true"><path d="M8 3 H22 L26 7 V29 H8 Z" fill="#fff" stroke="#000"/></svg>';
+const PERSON_ICON='<svg class="tic" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="5" r="3" fill="#ffd9a8" stroke="#000"/><path d="M2 15 q6-7 12 0" fill="#3b6ea5" stroke="#000"/></svg>';
 
 const WINDOWS = {
-  about:    {title:"Welcome",            icon:PERSON_ICON, w:380, h:430, x:null, y:null, body:`<div class="pane">${ABOUT}</div>`},
-  blog:     {title:"Blog",               icon:FOLDER_ICON, w:430, h:300, x:null, y:null, menu:true,
-             body:`<div class="pane gray" style="padding:0">${BLOG_FILES}</div><div class="statusbar"><div class="seg bevel-in">3 object(s)</div><div class="seg grow bevel-in"></div></div>`},
+  about:    {title:"Welcome", icon:PERSON_ICON, w:380, h:430, x:null, y:null,
+             src:'src-about', dropHeading:true, paneClass:'pane', lead:`<div style="text-align:center;margin-bottom:10px">
+               <svg width="56" height="56" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="11" r="6" fill="#ffd9a8" stroke="#000"/><path d="M3 30 q13-13 26 0" fill="#3b6ea5" stroke="#000"/></svg>
+               <h1 style="margin:6px 0 2px">Eren Can Sinecan</h1>
+               <p style="color:#000080;font-weight:bold;margin:0">Backend, DevOps, AI Agent Infrastructure Engineer</p>
+             </div>`},
+  blog:     {title:"Blog", icon:FOLDER_ICON, w:430, h:300, x:null, y:null, menu:true,
+             src:'src-blog', dropHeading:true, paneClass:'pane gray', panePad:'0',
+             status:`<div class="seg bevel-in">3 object(s)</div><div class="seg grow bevel-in"></div>`},
   somatic:  {title:"You Can't Retrieve What You Don't Know You're Missing - WordPad", icon:DOC_ICON, w:560, h:520, x:null, y:null, menu:true,
-             body:`<div class="pane">${ARTICLE}</div><div class="statusbar"><div class="seg bevel-in grow"><a href="/somatic-rag.html">esinecan.com/somatic-rag.html</a></div></div>`},
+             fetchSrc:'/somatic-rag.html', paneClass:'pane',
+             status:`<div class="seg bevel-in grow"><a href="/somatic-rag.html">esinecan.com/somatic-rag.html</a></div>`},
   mcpinsp:  {title:"An MCP tool to let AI debug any MCP server on the fly - WordPad", icon:DOC_ICON, w:560, h:520, x:null, y:null, menu:true,
-             body:`<div class="pane">${ARTICLE_MCP}</div><div class="statusbar"><div class="seg bevel-in grow"><a href="/mcp-inspector.html">esinecan.com/mcp-inspector.html</a></div></div>`},
-  projects: {title:"Projects",           icon:FOLDER_ICON, w:440, h:420, x:null, y:null,
-             body:`<div class="pane gray">${PROJECTS}</div>`},
-  resume:   {title:"Resume.doc - WordPad",icon:DOC_ICON,   w:520, h:520, x:null, y:null, menu:true,
-             body:`<div class="pane">${RESUME}</div>`},
+             fetchSrc:'/mcp-inspector.html', paneClass:'pane',
+             status:`<div class="seg bevel-in grow"><a href="/mcp-inspector.html">esinecan.com/mcp-inspector.html</a></div>`},
+  projects: {title:"Projects", icon:FOLDER_ICON, w:440, h:420, x:null, y:null,
+             src:'src-projects', dropHeading:true, paneClass:'pane gray'},
+  resume:   {title:"Resume.doc - WordPad", icon:DOC_ICON, w:520, h:520, x:null, y:null, menu:true,
+             src:'src-resume', dropHeading:true, paneClass:'pane'},
 };
 
 /* ===================== window manager ===================== */
@@ -840,8 +1056,11 @@ function reflectUrl(id){
 const INITIAL_WIN = HASH_TO_WIN[(location.hash||'').replace(/^#/,'').toLowerCase()];
 
 function makeMenu(){
-  return `<div class="menustrip">${['File','Edit','View','Help'].map(m=>'<span>'+m+'</span>').join('')}</div>`;
+  return `<div class="menustrip" aria-hidden="true">${['File','Edit','View','Help'].map(m=>'<span>'+m+'</span>').join('')}</div>`;
 }
+
+let winSeq = 0;          // gives each window a unique id for aria-labelledby
+let lastOpener = null;    // element that opened the newest window, for focus return
 
 function openWindow(id){
   const def = WINDOWS[id];
@@ -851,6 +1070,9 @@ function openWindow(id){
   const el=document.createElement('div');
   el.className='window bevel-out';
   el.dataset.id=id;
+  const titleId='wt'+(++winSeq);
+  el.setAttribute('role','dialog');
+  el.setAttribute('aria-labelledby',titleId);
   const vw=window.innerWidth||1280, vh=window.innerHeight||800;
   const W=Math.max(220, Math.min(def.w, vw-20));
   const H=Math.max(140, Math.min(def.h, vh-60));
@@ -862,20 +1084,41 @@ function openWindow(id){
   el.style.top=y+'px';
   el.innerHTML=`
     <div class="title-bar">
-      <div class="title-bar-text">${def.icon||''}<span>${def.title}</span></div>
+      <div class="title-bar-text">${def.icon||''}<span id="${titleId}">${def.title}</span></div>
       <div class="title-bar-controls">
-        <button class="tb-btn" data-act="min" title="Minimize"><span class="tb-glyph" style="align-self:flex-end;margin-bottom:2px">▁</span></button>
-        <button class="tb-btn" data-act="max" title="Maximize"><span class="tb-glyph">❐</span></button>
-        <button class="tb-btn" data-act="close" title="Close"><span class="tb-glyph">✕</span></button>
+        <button class="tb-btn" type="button" data-act="min" title="Minimize" aria-label="Minimize ${def.title}"><span class="tb-glyph" aria-hidden="true" style="align-self:flex-end;margin-bottom:2px">▁</span></button>
+        <button class="tb-btn" type="button" data-act="max" title="Maximize" aria-label="Maximize ${def.title}"><span class="tb-glyph" aria-hidden="true">❐</span></button>
+        <button class="tb-btn" type="button" data-act="close" title="Close" aria-label="Close ${def.title}"><span class="tb-glyph" aria-hidden="true">✕</span></button>
       </div>
     </div>
     ${def.menu?makeMenu():''}
-    <div class="window-body">${def.body}</div>`;
+    <div class="window-body">
+      <div class="${def.paneClass||'pane'}" tabindex="-1"${def.panePad?` style="padding:${def.panePad}"`:''}></div>
+      ${def.status?`<div class="statusbar">${def.status}</div>`:''}
+    </div>`;
+
+  // fill the pane from the static document, or from the article's own page
+  const pane = el.querySelector('.window-body > .pane');
+  if(def.lead) pane.insertAdjacentHTML('beforeend', def.lead);
+  if(def.src){
+    const content = takeSource(def.src);
+    if(content){
+      // the window title already names the section, so its heading is noise
+      if(def.dropHeading){
+        const h = content.querySelector(':scope > h2');
+        if(h) h.remove();
+      }
+      pane.appendChild(content);
+    }
+  }
+  if(def.fetchSrc) fillFromPage(pane, def.fetchSrc);
+
   desktop.appendChild(el);
 
   // taskbar button
   const tb=document.createElement('button');
   tb.className='task-btn';
+  tb.type='button';
   tb.innerHTML=`${(def.icon||'').replace('tic','ic')}<span class="lbl">${def.title}</span>`;
   tb.addEventListener('click',()=>{
     if(open[id].minimized){ toggleMin(id,false); focusWin(id); }
@@ -884,7 +1127,8 @@ function openWindow(id){
   });
   taskButtons.appendChild(tb);
 
-  open[id]={el,taskBtn:tb,minimized:false};
+  open[id]={el,taskBtn:tb,minimized:false,opener:lastOpener};
+  lastOpener=null;
 
   // wire controls
   el.querySelectorAll('.tb-btn').forEach(b=>{
@@ -896,26 +1140,34 @@ function openWindow(id){
       else if(a==='max') toggleMax(id);
     });
   });
+  // Escape closes the window the keyboard is inside
+  el.addEventListener('keydown',e=>{
+    if(e.key==='Escape'){ e.stopPropagation(); closeWin(id); }
+  });
   // drag
   dragify(el);
   // focus on any click
   el.addEventListener('mousedown',()=>focusWin(id));
   focusWin(id);
+  // put the caret in the content so a screen reader and the keyboard both
+  // land inside the window that just opened
+  if(open[id].opener) pane.focus({preventScroll:true});
 }
 
 function focusWin(id){
-  Object.values(open).forEach(o=>{ o.el.classList.add('inactive'); o.el.classList.remove('focused-top'); o.taskBtn.classList.remove('active'); });
+  Object.values(open).forEach(o=>{ o.el.classList.add('inactive'); o.el.classList.remove('focused-top'); o.taskBtn.classList.remove('active'); o.taskBtn.removeAttribute('aria-current'); });
   const o=open[id];
   if(!o) return;
   o.el.classList.remove('inactive');
   o.el.classList.add('focused-top');
   o.el.style.zIndex=++zTop;
   o.taskBtn.classList.add('active');
+  o.taskBtn.setAttribute('aria-current','true');
   reflectUrl(id);
 }
 function closeWin(id){
   const o=open[id]; if(!o) return;
-  const el=o.el, tb=o.taskBtn;
+  const el=o.el, tb=o.taskBtn, opener=o.opener;
   delete open[id];
   tb.remove();
   el.classList.add('closing');
@@ -927,6 +1179,8 @@ function closeWin(id){
   });
   if(topId) focusWin(topId);
   else history.replaceState(null,'',location.pathname+location.search);
+  // hand the keyboard back to whatever opened this window
+  if(opener && document.contains(opener)) opener.focus({preventScroll:true});
 }
 function openLink(url){
   document.body.classList.add('busy');
@@ -981,27 +1235,47 @@ function dragify(el){
 document.addEventListener('click',e=>{
   // in-pane buttons that open windows (e.g. About window shortcuts)
   const opener=e.target.closest('[data-open]');
-  if(opener){ openWindow(opener.dataset.open); closeStart(); }
+  if(opener && !opener.closest('.desk-icon, .sm-item')){
+    lastOpener=opener;
+    openWindow(opener.dataset.open);
+    closeStart();
+  }
 });
 
 function openTarget(elm){
+  lastOpener=elm;
   if(elm.dataset.open) openWindow(elm.dataset.open);
   else if(elm.dataset.article) openWindow(elm.dataset.article);
   else if(elm.dataset.link) openLink(elm.dataset.link);
 }
 
-/* desktop icon + file-row: double-click on desktop, single-tap on touch */
+/* Desktop icons and file rows are real links, so a crawler follows them and
+   the keyboard reaches them. The mouse keeps the Win95 contract: one click
+   selects, two clicks open. A keyboard activation arrives as a click with
+   detail 0, and that one opens straight away. */
 function bindDeskInteractions(){
+  // Enter and Space open the focused icon or file row. Anchors activate on
+  // Enter by themselves in a browser, but not in every automation or
+  // assistive-technology path, so the key is handled here directly.
+  document.addEventListener('keydown',e=>{
+    if(e.key!=='Enter' && e.key!==' ' && e.key!=='Spacebar') return;
+    const t=e.target.closest('.desk-icon[data-dbl], .file-row[data-dbl]');
+    if(!t) return;
+    e.preventDefault();
+    openTarget(t);
+  });
   document.addEventListener('dblclick',e=>{
     const t=e.target.closest('.desk-icon[data-dbl], .file-row[data-dbl]');
-    if(t) openTarget(t);
+    if(t){ e.preventDefault(); openTarget(t); }
   });
   document.addEventListener('click',e=>{
     const ic=e.target.closest('.desk-icon');
     const fr=e.target.closest('.file-row');
+    const hit=ic||fr;
+    if(hit && hit.tagName==='A') e.preventDefault();   // never navigate away
+    if(hit && e.detail===0){ openTarget(hit); return; } // Enter or Space
     if(isMobile()){                      // touch: one tap opens
-      if(ic){ openTarget(ic); return; }
-      if(fr){ openTarget(fr); return; }
+      if(hit){ openTarget(hit); return; }
     }
     document.querySelectorAll('.desk-icon.sel').forEach(d=>d.classList.remove('sel'));
     if(ic) ic.classList.add('sel');
@@ -1013,11 +1287,12 @@ function bindDeskInteractions(){
 /* ===================== Start menu ===================== */
 const startBtn=document.getElementById('start-btn');
 const startMenu=document.getElementById('start-menu');
-function closeStart(){ startMenu.classList.remove('open'); startBtn.classList.remove('on'); }
+function closeStart(){ startMenu.classList.remove('open'); startBtn.classList.remove('on'); startBtn.setAttribute('aria-expanded','false'); }
 startBtn.addEventListener('click',e=>{
   e.stopPropagation();
-  startMenu.classList.toggle('open');
+  const nowOpen = startMenu.classList.toggle('open');
   startBtn.classList.toggle('on');
+  startBtn.setAttribute('aria-expanded', nowOpen ? 'true' : 'false');
 });
 startMenu.addEventListener('click',e=>{
   const item=e.target.closest('.sm-item'); if(!item) return;
